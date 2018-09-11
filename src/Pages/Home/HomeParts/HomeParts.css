@@ -1,0 +1,44 @@
+.subpage-center{
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* From Captain Anonymous on CodePen */
+.scrollbar
+{
+	margin-left: 22px;
+	float: left;
+	height: 300px;
+	width: 95%;
+	background: #517ecb;;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
+#wrapper
+{
+	text-align: center;
+	margin: auto;
+}
+
+
+#style-8::-webkit-scrollbar-track
+{
+	background-color: #6790d7;
+}
+
+#style-8::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #b0caf7;
+}
+
+#style-8::-webkit-scrollbar-thumb
+{
+	background-color: #b0caf7;	
+}

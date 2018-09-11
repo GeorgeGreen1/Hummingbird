@@ -1,0 +1,135 @@
+.fg-hum{
+  background-color: #3b6ab9;
+  color: #fff;
+  border-radius: 10px;
+  margin: 5px 0px 5px 0px;
+  padding: 10px;
+}
+
+.container{
+  height: 100%;
+}
+
+.subpage-content{
+  padding: 5px 10px 5px 10px ;
+}
+
+.inner-present{
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #517ecb;
+  padding-bottom: 10px;
+}
+
+.inner-present.home-page {
+  margin: 10px;
+  height: 94%;
+}
+
+.inner-present.login-page {
+  margin: 2% 25% 2% 25%;
+  padding: 10px;
+  padding-top: 30px;
+  height: 94%;
+}
+
+.inner-present.price-display {
+  text-align: center;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+.inner-present.price-display .label {
+  margin: -5px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.inner-present.price-display .price-view {
+  margin-top: 20px;
+}
+.inner-present.price-display h1{
+  font-size: 32px;
+}
+.inner-present.price-display h2{
+  font-size: 40px;
+  font-family: 'Istok Web', sans-serif;
+}
+.inner-present.price-display a{
+  font-size: 20px;
+}
+.inner-present.login-page .entry-prompt{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 55%;
+}
+.sub-window{
+  width: 90%;
+  margin: auto;
+}
+
+/* Buttons */
+
+
+.btn-orange{
+  background-color: #ff903a;
+  color: #fff;
+  margin: 0px 0 -8px 0;
+  transition: none;
+}
+
+.btn-navlist{
+  width: 100%;
+}
+
+/* Sign In/Register Button */
+.btn-signin{
+  display: block;
+  width: 30%;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-btn{
+  text-align:center;
+}
+
+.btn-orange.active{
+  background-color: #f3ba7c;
+}
+
+.btn-orange:hover{
+  background-color: #ec8536;
+  color: #fff;
+}
+
+/* Select Account type button */
+.account-type-select{
+  margin-left: 24%;
+  margin-top: 10px;
+}
+
+.account-type-select .btn{
+  display: block;
+  color: #fff;
+  background-color: #2556a8;
+  transition: none;
+}
+
+.account-type-select .btn.student{
+  border-radius: 5px 0 0 5px;
+  display: inline;
+}
+.account-type-select .btn.tutor{
+  display: inline;
+  border-radius: 0 5px 5px 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.account-type-select .btn.active{
+  background-color: #6891d6;
+  border-radius: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}

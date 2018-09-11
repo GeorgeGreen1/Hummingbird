@@ -1,0 +1,7 @@
+.navigation-list{
+    margin: 10px;
+}
+
+.nav-link, .nav-link:hover{
+    color: #fff;
+}
