@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './HomeParts.css';
+import './DefaultHomeParts.css';
 import mathscience from '../../../Images/MathScience.png';
 import historybook from '../../../Images/HistoryBook.png';
 import paintbrush from '../../../Images/PaintBrush.png';

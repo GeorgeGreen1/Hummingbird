@@ -1,0 +1,49 @@
+.hours-select{
+    display: block;
+    margin-left: 32%;
+}
+
+.hours-select a{
+    font-size: 30px;
+}
+
+.hours-select .price-select{
+    width: 10%;
+}
+
+select{
+    background-color: #1b50a6;
+    color: #fff;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 80px !important;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.current-price{
+    text-align: center;
+    width:50%;
+    margin: auto;
+}
+.current-price a{
+    font-size: 38px;
+}
+
+.btn-checkout{
+    background-color: #1b50a6;
+    color: #fff;
+    margin-left: 70%;
+    width: 130px;
+    padding-top: 10px;
+    font-size: 24px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+.btn-checkout:hover{
+    background-color:#2556a8;
+    color: #fff;
+  }

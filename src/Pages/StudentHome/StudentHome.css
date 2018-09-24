@@ -1,0 +1,57 @@
+h2{
+    font-size: 50px;
+    text-align: center;
+}
+
+.inner-present{
+    padding: 0px;
+}
+
+table{
+    width: 100%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+th{
+    font-size: 24px;
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+td{
+    font-size: 20px;
+    padding-left: 10px;;
+}
+tr:nth-child(odd){
+    background-color:#517ecb;
+}
+tr:nth-child(even){
+    background-color:#3160b1;
+}
+
+.hours-display{
+    width: 70%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 60px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hours-count a{
+    font-size: 100px;
+    line-height: 80px;
+}
+.hours-labela a{
+    font-size: 20px;
+    line-height: 20px;
+}
+.hours-labelb{
+    width: 60%;
+    margin: auto;
+}
+.hours-labelb a{
+    font-size: 15px;
+    line-height: 20px;
+}

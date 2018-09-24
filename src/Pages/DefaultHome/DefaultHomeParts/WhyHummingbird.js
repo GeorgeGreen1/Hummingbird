@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import tutoringpic1 from '../../../Images/9mzqcmd.png';
 import tutoringpic2 from '../../../Images/2srpgf9.png';
 import tutoringpic3 from '../../../Images/Yk2stzO.png';
-import './HomeParts.css';
+import './DefaultHomeParts.css';
 
 class WhyHummingbird extends Component {
     render(){

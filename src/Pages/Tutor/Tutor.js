@@ -3,11 +3,12 @@ import NavBar from '../../Components/NavBar/NavBar';
 import banner from '../../Images/banner-img.png';
 
 class Tutor extends Component{
+    componentDidMount(){
+        this.props.onNavChange(2);
+    }
     render(){
         return (
-            <div className="container">
-                <img src={banner} alt="banner" width='100%'/>
-                <NavBar activeBtn={["","","active","",""]}/>
+            <div>
                 <div className="fg-hum">
                     <h2> Become A Tutor </h2>
                     <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut animi aperiam dicta, sequi vel praesentium!

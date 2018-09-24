@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './HomeParts.css';
+import './DefaultHomeParts.css';
 import mplsstpaul from '../../../Images/mplsstpaul.png';
 
 class Subjects extends Component {

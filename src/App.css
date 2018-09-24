@@ -1,13 +1,17 @@
 .fg-hum{
   background-color: #3b6ab9;
   color: #fff;
-  border-radius: 10px;
-  margin: 5px 0px 5px 0px;
-  padding: 10px;
+  margin: -15px 0px 5px 0px;
+  padding: 15px 10px 10px 10px;
 }
 
 .container{
   height: 100%;
+}
+
+.btn{
+  transition:none;
+  outline:none;
 }
 
 .subpage-content{
@@ -26,6 +30,11 @@
   height: 94%;
 }
 
+.inner-present.student-home-page {
+  margin: 10px 10px 20px 20px;
+  height: 300px;
+}
+
 .inner-present.login-page {
   margin: 2% 25% 2% 25%;
   padding: 10px;
@@ -33,29 +42,6 @@
   height: 94%;
 }
 
-.inner-present.price-display {
-  text-align: center;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
-.inner-present.price-display .label {
-  margin: -5px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-.inner-present.price-display .price-view {
-  margin-top: 20px;
-}
-.inner-present.price-display h1{
-  font-size: 32px;
-}
-.inner-present.price-display h2{
-  font-size: 40px;
-  font-family: 'Istok Web', sans-serif;
-}
-.inner-present.price-display a{
-  font-size: 20px;
-}
 .inner-present.login-page .entry-prompt{
   margin-left: auto;
   margin-right: auto;
@@ -66,6 +52,29 @@
   width: 90%;
   margin: auto;
 }
+.invalid-entry{
+  text-align: center;
+  color: rgb(255, 87, 87);
+  display: none;
+}
+.invalid-entry.active{
+  display: block;
+}
+
+.banner{
+  border-radius: 10px 10px 0px 0px;
+  margin: 0 0 -10px 0;
+}
+
+.footer{
+  padding: 10px;
+  color: white;
+  background-color: #1b50a6;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+  margin: -10px 0 0 0;
+}
+
 
 /* Buttons */
 
@@ -100,6 +109,30 @@
 
 .btn-orange:hover{
   background-color: #ec8536;
+  color: #fff;
+}
+
+/* Sign In/Register Button */
+.btn-tableswitch{
+  display: block;
+  color:#fff;
+  width: 14%;
+  padding: 2px;
+  margin-top: 10px;
+  margin-left: 80px;
+  margin-right: auto;
+  background-color:#517ecb;
+  border-radius: 5px;
+  float: left;
+  transition: none;
+}
+.btn-tableswitch.right{
+  margin-left: auto;
+  margin-right: 80px;
+  float: right;
+}
+.btn-tableswitch:hover{
+  background-color:#1b50a6;
   color: #fff;
 }
 

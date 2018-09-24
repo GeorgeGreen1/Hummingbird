@@ -5,12 +5,28 @@ import './NavList.css';
 
 class NavList extends Component {
     render() {
+       let btns =  
+        [{
+            route: "/",
+            btnName: "Who We Are"
+        },
+        {
+            route: "/why-hummingbird",
+            btnName: "Why Hummingbird?"
+        },
+        {
+            route: "/subjects",
+            btnName: "Subjects?"
+        },
+        {
+            route: "/locations",
+            btnName: "Locations"
+        }];
         return (
             <div className="navigation-list">
-                <Link className="nav-link" to="/"><span className="sr-only">(current)</span><NavListBtn name="Who We Are" to="/"/></Link>
-                <Link className="nav-link" to="/why-hummingbird"><span className="sr-only">(current)</span><NavListBtn name="Why Hummingbird?" to="/"/></Link>
-                <Link className="nav-link" to="/subjects"><span className="sr-only">(current)</span><NavListBtn name="Subjects" to="/"/></Link>
-                <Link className="nav-link" to="/locations"><span className="sr-only">(current)</span><NavListBtn name="Locations" to="/"/></Link>
+                {btns.map(item=> {
+                    return (<Link className="nav-link" to={item.route}><span className="sr-only">(current)</span><NavListBtn name={item.btnName} to="/"/></Link>)
+                })}
             </div>
         );
     }

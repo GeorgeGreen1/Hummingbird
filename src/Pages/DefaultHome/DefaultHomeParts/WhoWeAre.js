@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import studypic from '../../../Images/qvmESjM.png';
 import einstein from '../../../Images/Albert_Einstein_Head.jpg';
-import './HomeParts.css';
+import './DefaultHomeParts.css';
 
 class WhoWeAre extends Component {
     render(){

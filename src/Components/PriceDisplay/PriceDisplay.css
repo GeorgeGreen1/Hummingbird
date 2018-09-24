@@ -1,0 +1,8 @@
+.price-display{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.price-display table{
+    margin: auto;
+    width: 80%;
+}

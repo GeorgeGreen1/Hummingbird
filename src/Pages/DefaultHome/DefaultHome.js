@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
-import './Home.css';
+import './DefaultHome.css';
 import NavList from '../../Components/NavList/NavList'
 import banner from '../../Images/banner-img.png';
-import WhoWeAre from './HomeParts/WhoWeAre';
-import WhyHummingbird from './HomeParts/WhyHummingbird';
-import Subjects from './HomeParts/Subjects';
-import Locations from './HomeParts/Locations';
+import WhoWeAre from './DefaultHomeParts/WhoWeAre';
+import WhyHummingbird from './DefaultHomeParts/WhyHummingbird';
+import Subjects from './DefaultHomeParts/Subjects';
+import Locations from './DefaultHomeParts/Locations';
 
-class Home extends Component{
-
+class DefaultHome extends Component{
+    componentDidMount(){
+        this.props.onNavChange(0);
+    }
     render(){
         const currsubpage = this.props.subpage;
         let subpage;
@@ -23,23 +25,21 @@ class Home extends Component{
             subpage = <Locations />
         }
         return (
-            <div className="container">
-                <img className="home-banner" src={banner} alt="banner" width='100%'/>
-                <NavBar activeBtn={["active","","","",""]}/>
+            <div>
                 <div className="fg-hum">
-                    <div class="row">
-                        <div class="col-3">
+                    <div className="row">
+                        <div className="col-3">
                             <NavList />
                         </div>
-                        <div class="col-9">
-                            <div class="inner-present home-page">
+                        <div className="col-9">
+                            <div className="inner-present home-page">
                                 {subpage}
                             </div>
                         </div>
                     </div>
                 </div>
-                <footer class="footer">
-                    <div class="container">
+                <footer className="footer">
+                    <div className="container">
                         <span> Hummingbird Tutoring &copy; 2018</span>
                     </div>
                 </footer>
@@ -48,4 +48,4 @@ class Home extends Component{
     }
 }
 
-export default Home;
+export default DefaultHome;
