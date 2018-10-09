@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import studypic from '../../../Images/qvmESjM.png';
 import einstein from '../../../Images/Albert_Einstein_Head.jpg';
 import './DefaultHomeParts.css';
 
+// The aims and background of the company
+
 class WhoWeAre extends Component {
     render(){
         return (
+            <div>
+            { (!this.props.signedIn) ?
             <div className='subpage-content'>
                 <h3> Who We Are </h3>
                 <div className="row">
@@ -26,6 +31,9 @@ class WhoWeAre extends Component {
                 school has never been more competitive which is exactly why one-on-one help is needed for those of us who need more attention 
                 then a large classroom can provide. <br/> <u>Call or text now to set up an appointment!</u>
                 </div>
+            </div> :
+            <Redirect to="/" />
+            }
             </div>
         );
     }

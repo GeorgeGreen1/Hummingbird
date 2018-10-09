@@ -1,0 +1,15 @@
+.tutor-steps{
+    margin: auto;
+}
+.col-7 p{
+    width: 80%;
+}
+.tutor-steps p{
+    text-align: left;   
+    font-size: 24px;
+    width: 90%;
+}
+
+.tutor-image{
+    margin: auto;
+}

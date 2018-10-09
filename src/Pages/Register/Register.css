@@ -1,0 +1,15 @@
+.date-select{
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 5px;
+  }
+  .date-select.month-select{
+    width: 42%;
+  }
+  .date-select.day-select{
+    width: 25%;
+  }
+  .date-select.year-select{
+    width: 27%;
+    margin-right: 0px;
+  }

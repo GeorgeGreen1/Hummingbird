@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import './DefaultHomeParts.css';
 import mplsstpaul from '../../../Images/mplsstpaul.png';
 
+// The available locations
+
 class Subjects extends Component {
     render(){
         return (

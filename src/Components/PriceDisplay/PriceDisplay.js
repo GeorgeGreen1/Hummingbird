@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import "./PriceDisplay.css";
 
+// Lists available prices for different package categories
+
 class PriceDisplay extends Component{
 
     render(){

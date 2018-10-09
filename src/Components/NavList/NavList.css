@@ -5,3 +5,7 @@
 .nav-link, .nav-link:hover{
     color: #fff;
 }
+
+.btn-navlist{
+    width: 100%;
+  }

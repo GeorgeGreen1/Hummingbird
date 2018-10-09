@@ -1,15 +1,20 @@
 .subpage-center{
     text-align: center;
-    margin-top: 20px;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
+
+.subpage-content{
+	padding: 5px 10px 5px 10px;
+}  
 
 /* From Captain Anonymous on CodePen */
 .scrollbar
 {
-	margin-left: 22px;
+	margin-left: 5px;
 	float: left;
 	height: 300px;
-	width: 95%;
+	width: 98%;
 	background: #517ecb;;
 	overflow-y: scroll;
 	margin-bottom: 25px;

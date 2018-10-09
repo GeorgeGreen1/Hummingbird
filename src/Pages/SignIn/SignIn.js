@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import NavBar from '../../Components/NavBar/NavBar';
 import banner from '../../Images/banner-img.png';
+import './SignIn.css';
 import {Redirect} from 'react-router-dom';
+
+// The user sign in page. Sends a request to a server to retrieve user data and approve access
+
 const initState = {
     enter_email: "",
     enter_password: "",
@@ -16,18 +20,21 @@ class SignIn extends Component{
     }
 
     componentDidMount(){
-        this.props.onNavChange(5);
     }
 
+    // Changes the Username state 
     onUsernameChange = (event) => {
         this.setState({enter_username: event.target.value})
     };
 
+    // Changes the Password state
     onPasswordChange = (event) => {
         this.setState({enter_password: event.target.value});
     };
     
 
+    // First checks the validity of the user input, then sends a request to the database
+    
     onSignInButton  = () => {
         let valid = true;
         // Username validity
@@ -52,18 +59,15 @@ class SignIn extends Component{
                   password: this.state.enter_password
                 })
         }).then(res => res.json()).then(ret => {
-            this.props.onSetEmail(ret.email);
-            this.props.onSetName(ret.firstname);
-            this.props.onSign(!(this.props.signedIn));
+            this.props.onSign(true,ret.email,ret.firstname,ret.member_type);
         }
         );
     }
     render(){
         return (
             <div>
-            {   (this.props.signedIn) ?
-                <Redirect to="/" />
-                :
+            {   (!this.props.signedIn) ?
+                <div>
                 <div>
                 <div className="fg-hum">
                     <div className="inner-present login-page">
@@ -81,12 +85,14 @@ class SignIn extends Component{
                         </div>
                     </div>
                 </div>
-                </div>}
+                </div>
                 <footer class="footer">
                     <div class="container">
                         <span> Hummingbird Tutoring &copy; 2018</span>
                     </div>
-                </footer>
+                </footer> </div> :
+                <Redirect to="/" />
+            }
             </div>
         );
     }

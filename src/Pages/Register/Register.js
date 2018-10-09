@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import NavBar from '../../Components/NavBar/NavBar';
 import banner from '../../Images/banner-img.png';
 import AccountType from '../../Components/Register/AccountType';
-
+import '../SignIn/SignIn.css'
+import './Register.css';
 const initState = {
     email: "",
     name: "",
@@ -11,9 +13,30 @@ const initState = {
     invalidEmail: "",
     invalidName: "",
     invalidPassword: "",
-    invalidPassMatch: ""
+    invalidPassMatch: "",
+    invalidRegInfo: "",
+    month: "",
+    day: "",
+    year: "",
+    address: "",
+    city: "",
+    zip: "",
+    states:"",
+    phone:"",
+    invalidDOB: "",
+    invalidAddress: "",
+    invalidCity: "",
+    invalidZip: "",
+    invalidStates:"",
+    invalidPhone:""
 };
-
+const months = ["January","February","March","April","May","June","July",
+                "August","September","October","November","December"];
+const states = ["AL","AK","AZ","AR","CA","CO","CT","DC","DE","FL","GA","GU","HI",
+                "ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI",
+                "MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC",
+                "ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX",
+                "UT","VT","VA","VI","WA","WV","WI","WY"]                
 class Register extends Component{
     constructor(props){
         super(props);
@@ -21,35 +44,82 @@ class Register extends Component{
       }
 
     componentDidMount(){
-        this.props.onNavChange(6);
     }
-
+    // Changes the Email state
     onEmailChange = (event) => {
         this.setState({email: event.target.value})
     };    
-    
+    // Changes the User name state
     onNameChange = (event) => {
         this.setState({name: event.target.value})
     };
-
+    // Changes the Password state
     onPasswordChange = (event) => {
         this.setState({password: event.target.value});
     };
-
+    // Changes the Double-check Password state
     onPasswordRepeatChange = (event) => {
         this.setState({passwordRepeat: event.target.value});
     };
-
-    accountTypeChange = (val) => {
-        if (val == 0){
-            this.setState({selectedAccType : "student"});
-        } else {
-            this.setState({selectedAccType : "tutor"});
+    onMonthChange = (event) => {
+        this.setState({month: event.target.value})
+    }
+    onPhoneChange = (event) => {
+        this.setState({phone: event.target.value})
+    }
+    onDayChange = (event) => {
+        this.setState({day: event.target.value})
+    }
+    onYearChange = (event) => {
+        this.setState({year: event.target.value})
+    }
+    onAddressChange = (event) => {
+        this.setState({address: event.target.value})
+    }
+    onCityChange = (event) => {
+        this.setState({city: event.target.value})
+    }
+    onZipChange = (event) => {
+        this.setState({zip: event.target.value})
+    }
+    onStatesChange = (event) => {
+        this.setState({states: event.target.value})
+    }
+    days = (month) => {
+        var maxDay;
+        var allDays = []
+        if (month === "February"){
+            maxDay = 29;
         }
+        else if (["April","June","September","November"].indexOf(month)>=0){
+            maxDay = 30;
+        }
+        else{
+            maxDay = 31;
+        }
+        for (var i = 1; i <= maxDay; i++){
+            allDays.push(((i<10)?"0":"") + String(i));
+        }
+        return allDays;
     }
 
+    years = () => {
+        var allYears = [];
+        for (var i = 2007; i >=1901; i--){
+            allYears.push(String(i));
+        }
+        return allYears;
+    }
+
+    // Checks validity of user input, then sends a request to insert user data into the server. Then logs the user in.
     onRegisterClick = (event) =>{
         let valid = true;
+        this.setState({invalidEmail : "",
+                       invalidName:"",
+                       invalidPassword:"",
+                       invalidPassMatch:"",
+                       invalidRegInfo:"",
+                       });
         // Email validity
         if (this.state.email == ""){
             this.setState({invalidEmail : "active"});
@@ -71,6 +141,51 @@ class Register extends Component{
         } else if (this.state.invalidPassword === "active"){
             this.setState({invalidPassword : ""});
         }
+        // Address validity
+        if (this.state.address == ""){
+            this.setState({invalidAddress : "active"});
+            valid = false;
+        } else if (this.state.invalidAddress === "active"){
+            this.setState({invalidAddress : ""});
+        }
+        // City validity
+        if (this.state.city == ""){
+            this.setState({invalidCity : "active"});
+            valid = false;
+        } else if (this.state.invalidCity === "active"){
+            this.setState({invalidCity : ""});
+        }
+        // ZIP validity
+        if ((this.state.zip.length != 5)||(!(/^\d+$/.test(this.state.zip)))){
+            this.setState({invalidZip : "active"});
+            valid = false;
+        } else if (this.state.invalidZip === "active"){
+            this.setState({invalidZip : ""});
+        }
+        // State validity
+        if (this.state.states == ""){
+            this.setState({invalidStates : "active"});
+            valid = false;
+        } else if (this.state.invalidStates === "active"){
+            this.setState({invalidStates : ""});
+        }
+        // DOB validity
+        if ((this.state.day == "")||(this.state.month == "")||(this.state.year == "")){
+            this.setState({invalidDOB : "active"});
+            valid = false;
+        } else if (this.state.invalidDOB === "active"){
+            this.setState({invalidDOB : ""});
+        }
+        // Phone validity
+        if (((this.state.phone[3] != "-")||(this.state.phone[7] != "-"))
+            ||(!(/^\d+$/.test(this.state.phone.slice(0,3))))
+            ||(!(/^\d+$/.test(this.state.phone.slice(4,7))))
+            ||(!(/^\d+$/.test(this.state.phone.slice(8))))){
+            this.setState({invalidPhone : "active"});
+            valid = false;
+        } else if (this.state.invalidPhone === "active"){
+            this.setState({invalidPhone : ""});
+        }
         // Password match validity
         if (this.state.password !== this.state.passwordRepeat){
             this.setState({invalidPassMatch : "active"});
@@ -78,9 +193,9 @@ class Register extends Component{
         } else if (this.state.InvalidPassMatch === "active"){
             this.setState({invalidPassMatch : ""});
         }
-        console.log(this.state.name)
         // Send registration request to server
         if (valid){
+            var monthInd = months.indexOf(this.state.month) + 1
             fetch("http://localhost:3000/register",{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
@@ -88,38 +203,139 @@ class Register extends Component{
                 email: this.state.email,
                 username: this.state.name,
                 password: this.state.password,
+                birth_date: this.state.year+((monthInd<10)?"0":"")+String(monthInd)+this.state.day,
+                phone: this.state.phone,
+                street_addr: this.state.address,
+                city: this.state.city, 
+                state: this.state.states,
+                zip: this.state.zip
             })
             }).then(response => 
-                response.json()).then(ret => console.log(ret));
+                response.json()).then(ret => {
+                    if (ret === "invalid"){
+                        this.setState({invalidRegInfo: "active"})
+                    }
+                    else {
+                        this.props.onSign(true,ret.email,ret.firstname);
+                    }
+                });
         }
     }
     render(){
         return (
             <div>
+            { (!this.props.signedIn) ?
+            <div>
                 <div className="fg-hum">
-                   <div className="inner-present login-page">
+                   <div className="inner-present register-page">
                         <h3 align="center"> Register </h3>
-                        <div className="entry-prompt">
-                            <label for="email">E-mail:</label>
-                            <input type="text" class="form-control" id="email" onChange={this.onEmailChange} />
-                            <div className={"invalid-entry " + this.state.invalidEmail}>Please enter a valid email address!</div>
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                    <label for="email">E-mail:</label>
+                                    <input type="text" class="form-control" id="email" onChange={this.onEmailChange} />
+                                    <div className={"invalid-entry " + this.state.invalidEmail}>Please enter a valid email address!</div>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                    <label for="fullname">Full name (Firstname Lastname):</label>
+                                    <input type="text" class="form-control" id="fullname" onChange={this.onNameChange}/>
+                                    <div className={"invalid-entry " + this.state.invalidName}>Please enter a valid given name!</div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="entry-prompt">
-                            <label for="fullname">Full name (First name Last name):</label>
-                            <input type="text" class="form-control" id="fullname" onChange={this.onNameChange}/>
-                            <div className={"invalid-entry " + this.state.invalidName}>Please enter a valid given name!</div>
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                    <label for="password">Password:</label>
+                                    <input type="password" class="form-control" id="password" onChange={this.onPasswordChange}/>
+                                    <div className={"invalid-entry " + this.state.invalidPassword}>Please enter a valid password!</div>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                    <label for="repeat-password">Repeat Password:</label>
+                                    <input type="password" class="form-control" id="repeat-password" onChange={this.onPasswordRepeatChange}/>
+                                    <div className={"invalid-entry " + this.state.invalidPassMatch}>Please enter matching passwords!</div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="entry-prompt">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" onChange={this.onPasswordChange}/>
-                            <div className={"invalid-entry " + this.state.invalidPassword}>Please enter a valid password!</div>
+                        <div className="row">
+                            <div className="col-6">
+                            <div className="entry-prompt">
+                                <label for="birthdate">Date of Birth:</label>
+                                <div id="birthdate">
+                                <select class="date-select month-select" id="month" onChange={this.onMonthChange} required="">
+                                <option value="">Month</option>
+                                {months.map(item=>{
+                                return(<option>{item}</option>)
+                                })}
+                                </select>
+                                <select class="date-select day-select" id="day" onChange={this.onDayChange} required="">
+                                <option value="">Day</option>
+                                {this.days(this.state.month).map(item=>{
+                                return(<option>{item}</option>)
+                                })}
+                                </select>
+                                <select class="date-select year-select" id="year" onChange={this.onYearChange} required="">
+                                <option value="">Year</option>
+                                {this.years().map(item=>{
+                                return(<option>{item}</option>)
+                                })}
+                                </select>
+                                <div className={"invalid-entry " + this.state.invalidDOB}>Please enter a valid Date of Birth!</div>
+                                </div>
+                            </div>
+                                
+                            </div>
+                            <div className="col-6">
+                               <div className="entry-prompt">
+                                    <label for="address">Address:</label>
+                                    <input type="text" class="form-control" id="address" onChange={this.onAddressChange} />
+                                    <div className={"invalid-entry " + this.state.invalidAddress}>Please enter a valid address!</div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="entry-prompt">
-                            <label for="repeat-password">Repeat Password:</label>
-                            <input type="password" class="form-control" id="repeat-password" onChange={this.onPasswordRepeatChange}/>
-                            <div className={"invalid-entry " + this.state.invalidPassMatch}>Please enter matching passwords!</div>
-                            <a className="btn btn-orange btn-signin" href="#" role="button" onClick={this.onRegisterClick}>Register</a>
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                        <label for="city">City:</label>
+                                        <input type="text" class="form-control" id="city" onChange={this.onCityChange} />
+                                        <div className={"invalid-entry " + this.state.invalidCity}>Please enter a valid city!</div>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                            <div className="entry-prompt">
+                                <label for="states">State:</label><br/>
+                                <select class="date-select month-select" id="states" onChange={this.onStatesChange} required="">
+                                    <option value="">State</option>
+                                    {states.map(item=>{
+                                    return(<option>{item}</option>)
+                                    })}
+                                </select>
+                                <div className={"invalid-entry " + this.state.invalidStates}>Please enter a valid state!</div>
+                                </div>
+                            </div>
                         </div>
+                        <div className="row">
+                            <div className="col-6">
+                               <div className="entry-prompt">
+                                        <label for="zip">ZIP Code:</label>
+                                        <input type="text" class="form-control" id="zip" onChange={this.onZipChange} />
+                                        <div className={"invalid-entry " + this.state.invalidZip}>Please enter a valid ZIP code!</div>
+                                </div>
+                            </div>
+                            <div className="col-6">
+                               <div className="entry-prompt">
+                                        <label for="phone">Phone Number (XXX-XXX-XXXX):</label>
+                                        <input type="text" class="form-control" id="phone" onChange={this.onPhoneChange} />
+                                        <div className={"invalid-entry " + this.state.invalidPhone}>Please enter a valid Phone Number!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a className="btn btn-orange btn-signin" href="#" role="button" onClick={this.onRegisterClick}>Register</a><br/>
+                        <div className={"invalid-entry " + this.state.invalidRegInfo}>Invalid Registration Info. Please try a different email!</div>
                     </div>
                 </div>
                 <footer class="footer">
@@ -127,6 +343,9 @@ class Register extends Component{
                         <span> Hummingbird Tutoring &copy; 2018</span>
                     </div>
                 </footer>
+            </div>:
+            <Redirect to="/" />
+            }
             </div>
         );
     }

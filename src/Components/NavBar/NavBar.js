@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './NavBar.css';
-import humlogo from '../../Images/HummingbirdLogo-small.png';
+import humlogo from '../../Images/HummingbirdLogo.png';
 
 class NavBar extends Component{
     render() {
@@ -10,65 +10,84 @@ class NavBar extends Component{
             {
                 title: "Home",
                 listClass: "nav-item nav-main " + ((this.props.activeBtn===0)?"active":""),
-                route: "/"
+                route: "/",
+                id: 0
             },
-            (this.props.signedIn)?
-                {}:{
-                    title: "Pricing",
+            (this.props.signedIn)?(
+                (this.props.member_type === 'tutor')?
+                {
+                    title: "Log Hours",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
-                    route: "/pricing"
-                },
-            (this.props.signedIn)?
-                {}:{
-                    title: "Become A Tutor ",
-                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
-                    route: "/tutor"
-                },
-            (this.props.signedIn)?
+                    route: "/findtutor",
+                    id: 1
+                }
+                :
                 {
                     title: "Find a Tutor",
-                    listClass: "nav-item nav-main " + ((this.props.activeBtn===3)?"active":""),
-                    route: "/tutor"
-                }:{},
-            (this.props.signedIn)?
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
+                    route: "/findtutor",
+                    id: 1
+                }):{
+                        title: "Pricing",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
+                    route: "/pricing",
+                    id: 1
+                },
+            (this.props.signedIn)?(
+                (this.props.member_type === 'tutor')?
+                // {
+                //     title: "Log Hours",
+                //     listClass: "nav-item nav-main " + ((this.props.activeBtn===3)?"active":""),
+                //     route: "/findtutor"
+                // }
                 {
-                    title: "Purchase Tutoring Hours",
-                    listClass: "nav-item nav-main " + ((this.props.activeBtn===4)?"active":""),
-                    route: "/purchasehours"
-                }:{}
+                    title: "SPACE",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
+                    route: "/addhours",
+                    id: 2
+                }
+                :
+                {
+                    title: "Add Tutoring Hours",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
+                    route: "/addhours",
+                    id: 2
+                }):{
+                    title: "Become A Tutor ",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
+                    route: "/tutor",
+                    id: 2
+                },
         ].filter(item=>{return (item.route !== undefined)})
         // Items displayed on the right side of the nav bar
         let acctBarItems = [
             (this.props.signedIn)?
-            {}:{
-                title: "Sign In",
-                listClass: "nav-item nav-acct " + ((this.props.activeBtn===5)?"active":""),
-                route: "/signin",
-                onClick: {}
-            },
-            (this.props.signedIn)?
-            {}:{
-                title: "Register",
-                listClass: "nav-item nav-acct " + ((this.props.activeBtn===6)?"active":""),
-                route: "/register",
-                onClick: {}
-            },
-            (this.props.signedIn)?
             {
                 title: "My Account",
-                listClass: "nav-item nav-acct " + ((this.props.activeBtn===7)?"active":""),
-                route: "/",
-                onClick: () => {}
-            }:{},
+                listClass: "nav-item nav-acct " + ((this.props.activeBtn===3)?"active":""),
+                route: "/account/myinfo",
+                onClick: ()=>{this.props.onNavChange(3)}
+            }:{
+                title: "Sign In",
+                listClass: "nav-item nav-acct " + ((this.props.activeBtn===3)?"active":""),
+                route: "/signin",
+                onClick: ()=>{
+                    this.props.onNavChange(3)}
+            },
             (this.props.signedIn)?
             {
                 title: "Sign Out",
                 listClass: "nav-item nav-acct",
                 route: "/signin",
-                onClick: () => this.props.onSignOut()
-            }:{}
+                onClick: ()=>{this.props.onSign(false,"","");
+                                this.props.onNavChange(0)}
+            }:{
+                title: "Register",
+                listClass: "nav-item nav-acct " + ((this.props.activeBtn===4)?"active":""),
+                route: "/register",
+                onClick: ()=>{this.props.onNavChange(4)}
+            }
         ]
-        // let displayItems = barItems.filter(item=>{return (item.route !== undefined)})
         return (
             <nav className="navbar navbar-expand navbar-dark bg-orange">
                 <div className="container">
@@ -81,7 +100,7 @@ class NavBar extends Component{
                     <ul className="navbar-nav mr-auto">
                     {barItems.map(item=>{
                         return(<li className={item.listClass}>
-                                <Link className="nav-link" to={item.route}>{item.title} <span className="sr-only">(current)</span></Link>
+                                <Link className="nav-link" to={item.route} onClick={() => this.props.onNavChange(item.id)}>{item.title} <span className="sr-only">(current)</span></Link>
                               </li>)
                     })}
                     </ul>
@@ -89,7 +108,7 @@ class NavBar extends Component{
                     {acctBarItems.map(item=>{
 
                         return((item.route!==undefined)?(<li className={item.listClass}>
-                                 <Link className="nav-link" to={item.route} onClick={item.onClick}>{item.title} <span className="sr-only">(current)</span></Link>
+                                 <Link className="nav-link" to={item.route} onClick={item.onClick} >{item.title} <span className="sr-only">(current)</span></Link>
                               </li>) : null)
                     })}
                     </ul>

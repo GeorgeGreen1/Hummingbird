@@ -8,9 +8,10 @@ import WhyHummingbird from './DefaultHomeParts/WhyHummingbird';
 import Subjects from './DefaultHomeParts/Subjects';
 import Locations from './DefaultHomeParts/Locations';
 
+// What the user sees by default upon loading the web page, basic information can be accessed here
+
 class DefaultHome extends Component{
     componentDidMount(){
-        this.props.onNavChange(0);
     }
     render(){
         const currsubpage = this.props.subpage;
@@ -29,7 +30,7 @@ class DefaultHome extends Component{
                 <div className="fg-hum">
                     <div className="row">
                         <div className="col-3">
-                            <NavList />
+                            <NavList btnSet="home"/>
                         </div>
                         <div className="col-9">
                             <div className="inner-present home-page">

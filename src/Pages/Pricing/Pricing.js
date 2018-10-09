@@ -1,22 +1,28 @@
 import React, {Component} from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
-import banner from '../../Images/banner-img.png';
+import {Redirect} from 'react-router-dom';
+import scrabble from '../../Images/scrabble.jpeg'
 import PriceDisplay from '../../Components/PriceDisplay/PriceDisplay';
 
+// Shows the different pricing options that are available to users
 
 const hours = [10,14,18,22,24,28,32,36,48,60,80,100];
 const prices = [60,58,58,58,56,56,56,56,52,50,48,46];
 
 class Pricing extends Component{
     componentDidMount(){
-        this.props.onNavChange(1);
+        // this.props.onNavChange(1);
     }
     render(){
         return (
+          <div>  
+          { (!this.props.signedIn) ?
             <div>
                 <div className="fg-hum">
-                    <h2 align="center"> Package Options </h2>
-                    <div className="row sub-window">
+                    <h2 align="center"> Price Options </h2>
+                    <p> As a student, you have several options prices depending on the number of tutoring hours you wish to purchase at a single time.
+                        These options are split into three levels shown below. 
+                    </p>
+                    <div className="row pricing-window">
                         <div className="col-4">
                             <PriceDisplay package="Bronze" hours={hours.slice(0,4)} prices={prices.slice(0,4)}/>
                         </div>
@@ -33,6 +39,8 @@ class Pricing extends Component{
                         <span> Hummingbird Tutoring &copy; 2018</span>
                     </div>
                 </footer>
+            </div> : 
+            <Redirect to="/" />}
             </div>
         );
     }

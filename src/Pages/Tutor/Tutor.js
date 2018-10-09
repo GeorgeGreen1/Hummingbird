@@ -1,25 +1,46 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import NavBar from '../../Components/NavBar/NavBar';
-import banner from '../../Images/banner-img.png';
+import tutorimage from '../../Images/people-woman-coffee-meeting.jpg';
+import './Tutor.css';
+
+
+// Displays information on becoming a tutor
 
 class Tutor extends Component{
     componentDidMount(){
-        this.props.onNavChange(2);
     }
     render(){
         return (
             <div>
+            { (!this.props.signedIn) ?
+            <div>
                 <div className="fg-hum">
-                    <h2> Become A Tutor </h2>
-                    <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut animi aperiam dicta, sequi vel praesentium!
-                         Voluptas dolore, dicta eveniet reprehenderit, culpa quas minus ad nostrum soluta voluptatem quidem 
-                         consequuntur laudantium.</p>
+                    <h2> Become A Tutor</h2>
+                    <div className="row">
+                        <div className="col-7">
+                            <p>If you wish to join our team of tutors, please follow the steps listed below:</p>
+                            <div className="tutor-steps">
+                            <p>1) Register an account. </p>
+                            <p>2) Go to "My Account" and select "Becoming a Tutor". </p>
+                            <p>3) Read the additional information and select "Apply Now". </p>
+                            <p>4) Fill out and submit the application. </p>
+                            </div><br/>
+                            <p>Check your email in the coming days, we will contact you shortly after reviewing your application.</p>
+                        </div>
+                        <div className="col-5">
+                          <img className="center-img" src={tutorimage} alt="tutor-image" width='420px'/>
+                        </div>
+                    </div>
                 </div>
                 <footer class="footer">
                     <div class="container">
                         <span> Hummingbird Tutoring &copy; 2018</span>
                     </div>
                 </footer>
+            </div> :
+            <Redirect to="/" />
+            }
             </div>
         );
     }

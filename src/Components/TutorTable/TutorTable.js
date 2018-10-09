@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './TutorTable.css';
 
   const tutors = [
     {
@@ -136,7 +137,7 @@ class TutorTable extends Component {
     displaySetup(page,list){
         const end = ( (page*10+10<list.length)?(page*10+10) : list.length )
         this.setState({lastInd: end});
-        return(list.slice( (page*10), end));
+        return(list.slice((page*10), end));
     }
 
     pageUp = () => {
@@ -170,8 +171,10 @@ class TutorTable extends Component {
                             </tr>)
                 })}
             </table>
-            {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>Last Page</a>:null}
-            {(this.state.lastInd<tutors.length)?<a className="btn btn-tableswitch right" href="#" role="button" onClick={this.pageUp}>Next Page</a>:null}
+            <div className="control">
+            {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
+            {(this.state.lastInd<tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
+            </div>
             </div>
         )
     }
