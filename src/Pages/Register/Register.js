@@ -32,11 +32,11 @@ const initState = {
 };
 const months = ["January","February","March","April","May","June","July",
                 "August","September","October","November","December"];
-const states = ["AL","AK","AZ","AR","CA","CO","CT","DC","DE","FL","GA","GU","HI",
-                "ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI",
-                "MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC",
-                "ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX",
-                "UT","VT","VA","VI","WA","WV","WI","WY"]                
+    const states = ["AL","AK","AZ","AR","CA","CO","CT","DC","DE","FL","GA","GU","HI",
+                    "ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI",
+                    "MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC",
+                    "ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX",
+                    "UT","VT","VA","VI","WA","WV","WI","WY"]                
 class Register extends Component{
     constructor(props){
         super(props);
@@ -64,14 +64,14 @@ class Register extends Component{
     onMonthChange = (event) => {
         this.setState({month: event.target.value})
     }
-    onPhoneChange = (event) => {
-        this.setState({phone: event.target.value})
-    }
     onDayChange = (event) => {
         this.setState({day: event.target.value})
     }
     onYearChange = (event) => {
         this.setState({year: event.target.value})
+    }
+    onPhoneChange = (event) => {
+        this.setState({phone: event.target.value})
     }
     onAddressChange = (event) => {
         this.setState({address: event.target.value})
@@ -119,6 +119,12 @@ class Register extends Component{
                        invalidPassword:"",
                        invalidPassMatch:"",
                        invalidRegInfo:"",
+                       invalidDOB: "",
+                       invalidAddress: "",
+                       invalidCity: "",
+                       invalidZip: "",
+                       invalidStates:"",
+                       invalidPhone:""
                        });
         // Email validity
         if (this.state.email == ""){
@@ -338,11 +344,6 @@ class Register extends Component{
                         <div className={"invalid-entry " + this.state.invalidRegInfo}>Invalid Registration Info. Please try a different email!</div>
                     </div>
                 </div>
-                <footer class="footer">
-                    <div class="container">
-                        <span> Hummingbird Tutoring &copy; 2018</span>
-                    </div>
-                </footer>
             </div>:
             <Redirect to="/" />
             }

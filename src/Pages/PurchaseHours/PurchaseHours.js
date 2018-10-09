@@ -60,11 +60,6 @@ class PurchaseHours extends Component{
                     </div>
                     <a className="btn btn-checkout" href="#" role="button" onClick={this.pageDown}>Checkout</a>
                 </div>
-                <footer class="footer">
-                    <div class="container">
-                        <span> Hummingbird Tutoring &copy; 2018</span>
-                    </div>
-                </footer>
             </div>:
             <Redirect to="/" />
             }

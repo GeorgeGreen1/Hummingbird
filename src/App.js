@@ -18,9 +18,9 @@ import StudMyAccount from './Pages/StudMyAccount/StudMyAccount';
 import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
 const initState = {
 
-  signedIn : false,
-  email: "dave@davemail.com",
-  name: "Dave",
+  signedIn : true,
+  email: "arbiter@gmail.com",
+  name: "Arbud",
   navbarElem: 0,
   member_type: 'student'
 }
@@ -105,7 +105,7 @@ class App extends Component {
       },
       {
         path: "/account/myinfo",
-        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} subpage='myinfo'/> : <StudMyAccount signedIn={this.state.signedIn} subpage='myinfo'/>
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} signedIn={this.state.signedIn} subpage='myinfo'/> : <StudMyAccount email={this.state.email} signedIn={this.state.signedIn} subpage='myinfo'/>
       },
       {
         path: "/account/settings",
@@ -131,6 +131,11 @@ class App extends Component {
                 return(<Route exact path={item.path} render={()=>item.renderComp} />)
               })
             }
+            <footer class="footer">
+                <div class="container">
+                    <span> Hummingbird Tutoring &copy; 2018</span>
+                </div>
+            </footer>
         </div>
       </Router>
     );

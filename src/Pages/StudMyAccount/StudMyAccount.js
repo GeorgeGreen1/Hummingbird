@@ -14,7 +14,7 @@ class StudMyAccount extends Component{
     render() {
         let subpage;
         if (this.props.subpage === 'myinfo'){
-            subpage=<StudAccountInfo />
+            subpage=<StudAccountInfo  email={this.props.email}/>
         } else if (this.props.subpage === 'settings'){
             subpage=<StudAccountSettings />
         } else if (this.props.subpage === 'becomeatutor') {

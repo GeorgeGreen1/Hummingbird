@@ -86,11 +86,7 @@ class SignIn extends Component{
                     </div>
                 </div>
                 </div>
-                <footer class="footer">
-                    <div class="container">
-                        <span> Hummingbird Tutoring &copy; 2018</span>
-                    </div>
-                </footer> </div> :
+                </div> :
                 <Redirect to="/" />
             }
             </div>

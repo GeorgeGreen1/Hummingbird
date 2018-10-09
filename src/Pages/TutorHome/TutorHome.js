@@ -32,11 +32,6 @@ class TutorHome extends Component{
                         </div>
                     </div>
                 </div>
-                <footer class="footer">
-                    <div className="container">
-                        <span> Hummingbird Tutoring &copy; 2018</span>
-                    </div>
-                </footer>
             </div>
         );
     }
