@@ -1,0 +1,40 @@
+.name-entry{
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 30px;
+}
+
+.select-type{
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+    text-align: center;
+}
+.type-bubble{
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.search-input{
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.search-bar{
+    width: 80%;
+}
+
+.btn-search{
+    margin: 0 0 0 12px;
+    height: 40px;
+}
+.search-dropdown{
+    margin-left: 20px;
+}
+
+h4{
+    margin-bottom: 10px;
+}

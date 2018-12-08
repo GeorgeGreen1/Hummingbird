@@ -7,24 +7,27 @@ import '../SignIn/SignIn.css'
 import './Register.css';
 const initState = {
     email: "",
-    name: "",
+    firstName: "",
+    lastName: "",
     password: "",
     passwordRepeat: "",
     invalidEmail: "",
-    invalidName: "",
+    invalidFirstName: "",
     invalidPassword: "",
     invalidPassMatch: "",
     invalidRegInfo: "",
     month: "",
     day: "",
     year: "",
-    address: "",
+    meetAddress: "",
+    billAddress: "",
     city: "",
     zip: "",
     states:"",
     phone:"",
     invalidDOB: "",
-    invalidAddress: "",
+    invalidMeetAddress: "",
+    invalidBillAddress: "",
     invalidCity: "",
     invalidZip: "",
     invalidStates:"",
@@ -49,9 +52,13 @@ class Register extends Component{
     onEmailChange = (event) => {
         this.setState({email: event.target.value})
     };    
-    // Changes the User name state
-    onNameChange = (event) => {
-        this.setState({name: event.target.value})
+    // Changes the First name state
+    onFirstNameChange = (event) => {
+        this.setState({firstName: event.target.value})
+};
+    // Changes the Last name state
+    onLastNameChange = (event) => {
+        this.setState({lastName: event.target.value})
     };
     // Changes the Password state
     onPasswordChange = (event) => {
@@ -73,8 +80,11 @@ class Register extends Component{
     onPhoneChange = (event) => {
         this.setState({phone: event.target.value})
     }
-    onAddressChange = (event) => {
-        this.setState({address: event.target.value})
+    onMeetAddressChange = (event) => {
+        this.setState({meetAddress: event.target.value})
+    }
+    onBillAddressChange = (event) => {
+        this.setState({billAddress: event.target.value})
     }
     onCityChange = (event) => {
         this.setState({city: event.target.value})
@@ -115,7 +125,7 @@ class Register extends Component{
     onRegisterClick = (event) =>{
         let valid = true;
         this.setState({invalidEmail : "",
-                       invalidName:"",
+                       invalidFirstName:"",
                        invalidPassword:"",
                        invalidPassMatch:"",
                        invalidRegInfo:"",
@@ -133,12 +143,19 @@ class Register extends Component{
         } else if (this.state.invalidEmail === "active"){
             this.setState({invalidEmail : ""});
         }
-        // Name validity
-        if (this.state.name == ""){
-            this.setState({invalidName : "active"});
+        // First Name validity
+        if (this.state.firstName == ""){
+            this.setState({invalidFirstName : "active"});
             valid = false;
-        } else if (this.state.invalidName === "active"){
-            this.setState({invalidName : ""});
+        } else if (this.state.invalidFirstName === "active"){
+            this.setState({invalidFirstName : ""});
+        }
+        // Last Name validity
+        if (this.state.lastName == ""){
+            this.setState({invalidLastName : "active"});
+            valid = false;
+        } else if (this.state.invalidLastName === "active"){
+            this.setState({invalidLastName : ""});
         }
         // Password validity
         if (this.state.password == ""){
@@ -147,12 +164,19 @@ class Register extends Component{
         } else if (this.state.invalidPassword === "active"){
             this.setState({invalidPassword : ""});
         }
-        // Address validity
-        if (this.state.address == ""){
-            this.setState({invalidAddress : "active"});
+        // Meeting Address validity
+        if (this.state.meetAddress == ""){
+            this.setState({invalidMeetAddress : "active"});
             valid = false;
-        } else if (this.state.invalidAddress === "active"){
-            this.setState({invalidAddress : ""});
+        } else if (this.state.invalidMeetAddress === "active"){
+            this.setState({invalidMeetAddress : ""});
+        }
+        // Billing Address validity
+        if (this.state.billAddress == ""){
+            this.setState({invalidBillAddress : "active"});
+            valid = false;
+        } else if (this.state.invalidBillAddress === "active"){
+            this.setState({invalidBillAddress : ""});
         }
         // City validity
         if (this.state.city == ""){
@@ -207,11 +231,13 @@ class Register extends Component{
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
                 email: this.state.email,
-                username: this.state.name,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
                 password: this.state.password,
                 birth_date: this.state.year+((monthInd<10)?"0":"")+String(monthInd)+this.state.day,
                 phone: this.state.phone,
-                street_addr: this.state.address,
+                meet_addr: this.state.meetAddress,
+                bill_addr: this.state.billAddress,
                 city: this.state.city, 
                 state: this.state.states,
                 zip: this.state.zip
@@ -245,9 +271,9 @@ class Register extends Component{
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="fullname">Full name (Firstname Lastname):</label>
-                                    <input type="text" class="form-control" id="fullname" onChange={this.onNameChange}/>
-                                    <div className={"invalid-entry " + this.state.invalidName}>Please enter a valid given name!</div>
+                                    <label for="phone">Phone (XXX-XXX-XXXX):</label>
+                                    <input type="text" class="form-control" id="phone" onChange={this.onPhoneChange} />
+                                    <div className={"invalid-entry " + this.state.invalidPhone}>Please enter a valid Phone Number!</div>
                                 </div>
                             </div>
                         </div>
@@ -264,6 +290,22 @@ class Register extends Component{
                                     <label for="repeat-password">Repeat Password:</label>
                                     <input type="password" class="form-control" id="repeat-password" onChange={this.onPasswordRepeatChange}/>
                                     <div className={"invalid-entry " + this.state.invalidPassMatch}>Please enter matching passwords!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                    <label for="firstname">First Name:</label>
+                                    <input type="text" class="form-control" id="firstname" onChange={this.onFirstNameChange}/>
+                                    <div className={"invalid-entry " + this.state.invalidFirstName}>Please enter a valid first name!</div>
+                               </div>
+                            </div>
+                            <div className="col-6">
+                                <div className="entry-prompt">
+                                    <label for="lastname">Last Name:</label>
+                                    <input type="text" class="form-control" id="lastname" onChange={this.onLastNameChange}/>
+                                    <div className={"invalid-entry " + this.state.invalidLastName}>Please enter a valid last name!</div>
                                 </div>
                             </div>
                         </div>
@@ -296,14 +338,24 @@ class Register extends Component{
                                 
                             </div>
                             <div className="col-6">
-                               <div className="entry-prompt">
-                                    <label for="address">Address:</label>
-                                    <input type="text" class="form-control" id="address" onChange={this.onAddressChange} />
-                                    <div className={"invalid-entry " + this.state.invalidAddress}>Please enter a valid address!</div>
+                                <div className="entry-prompt">
+                                    <label for="meet-address">Preferred Meeting Address:</label>
+                                    <input type="text" class="form-control" id="meet-address" onChange={this.onMeetAddressChange} />
+                                    <div className={"invalid-entry " + this.state.invalidMeetAddress}>Please enter a valid meeting address!</div>
                                 </div>
-                            </div>
+                            </div> 
+                        </div>
+                        <div className="bill-label">
+                        <h3>Billing Info:</h3>
                         </div>
                         <div className="row">
+                            <div className="col-6">
+                               <div className="entry-prompt">
+                                    <label for="bill-address">Billing Address:</label>
+                                    <input type="text" class="form-control" id="bill-address" onChange={this.onBillAddressChange} />
+                                    <div className={"invalid-entry " + this.state.invalidBillAddress}>Please enter a valid billing address!</div>
+                                </div>
+                            </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
                                         <label for="city">City:</label>
@@ -311,8 +363,10 @@ class Register extends Component{
                                         <div className={"invalid-entry " + this.state.invalidCity}>Please enter a valid city!</div>
                                 </div>
                             </div>
+                        </div>
+                        <div className="row">
                             <div className="col-6">
-                            <div className="entry-prompt">
+                                <div className="entry-prompt">
                                 <label for="states">State:</label><br/>
                                 <select class="date-select month-select" id="states" onChange={this.onStatesChange} required="">
                                     <option value="">State</option>
@@ -323,20 +377,11 @@ class Register extends Component{
                                 <div className={"invalid-entry " + this.state.invalidStates}>Please enter a valid state!</div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="row">
                             <div className="col-6">
                                <div className="entry-prompt">
                                         <label for="zip">ZIP Code:</label>
                                         <input type="text" class="form-control" id="zip" onChange={this.onZipChange} />
                                         <div className={"invalid-entry " + this.state.invalidZip}>Please enter a valid ZIP code!</div>
-                                </div>
-                            </div>
-                            <div className="col-6">
-                               <div className="entry-prompt">
-                                        <label for="phone">Phone Number (XXX-XXX-XXXX):</label>
-                                        <input type="text" class="form-control" id="phone" onChange={this.onPhoneChange} />
-                                        <div className={"invalid-entry " + this.state.invalidPhone}>Please enter a valid Phone Number!</div>
                                 </div>
                             </div>
                         </div>
@@ -351,5 +396,4 @@ class Register extends Component{
         );
     }
 }
-
 export default Register;

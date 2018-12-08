@@ -1,0 +1,59 @@
+.notif-table{
+    color: white;
+    padding: 5px 10px 5px 10px;
+    height: 80%;
+}
+.notifications{
+    margin-top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height:180px;
+}
+
+.inner-present.notif {
+    margin: -2px 10px 10px 10px;
+    height: 100%;
+  }
+.subpage-row{
+    margin: 0 0 10px 0;
+}
+
+
+.scrollbar{
+    height: 130px;
+    margin-top: 8px;
+    width: 97%;
+}
+
+.force-overflow{
+    min-height: 180px;
+}
+
+hr{
+    margin: 4px 0 4px 0;
+    border-color: #7197d8;
+    width: 99%;
+}
+.notifications a{
+    font-size: 16px;
+}
+
+.notif-rm{
+    background-color: #ff903a;
+    color: #f5e4d7;
+    padding: 0 5px 0 5px;
+    float: right;
+    margin-top: 4px;
+    margin-right: 4px;
+    border-radius: 3px;
+    font-size: 12px;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */    
+}
+.notif-rm:hover{
+    background-color: #fdad70;
+    cursor: pointer;
+}

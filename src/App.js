@@ -10,6 +10,7 @@ import StudentHome from './Pages/StudentHome/StudentHome';
 import TutorHome from './Pages/TutorHome/TutorHome';
 import Tutor from './Pages/Tutor/Tutor';
 import Pricing from './Pages/Pricing/Pricing';
+import MySessions from './Pages/MySessions/MySessions';
 import PurchaseHours from './Pages/PurchaseHours/PurchaseHours';
 import FindTutor from './Pages/FindTutor/FindTutor';
 import SignIn from './Pages/SignIn/SignIn';
@@ -19,10 +20,11 @@ import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
 const initState = {
 
   signedIn : true,
-  email: "arbiter@gmail.com",
-  name: "Arbud",
+  email: "cheek100@gmail.com",
+  name: "Tyler",
   navbarElem: 0,
-  member_type: 'student'
+  member_type: 'student',
+  id: 6
 }
 
 class App extends Component {
@@ -33,11 +35,12 @@ class App extends Component {
 
 
   // Sets the sign in state, this will likely be moved to a single shared function
-  onSign = (sign,email,firstname,member_type) => {
+  onSign = (sign,email,firstname,member_type,id) => {
     this.setState({signedIn: sign,
                    email: email,
                    name: firstname,
-                  member_type: member_type});
+                   member_type: member_type,
+                   id: id});
   };
 
   // Changes the nav bar display each time a route changes
@@ -50,7 +53,7 @@ class App extends Component {
     [ // Default (not signed in) page
       {
         path: "/",
-        renderComp: (this.state.signedIn === false) ? <DefaultHome subpage="who-we-are" signedIn={this.state.signedIn}  onNavChange={this.onNavChange}/> : ((this.state.member_type === 'tutor') ? <TutorHome memberType={this.state.member_type} signedIn={this.state.signedIn}  onNavChange={this.onNavChange} userName={this.state.name}/>:<StudentHome memberType={this.state.member_type} signedIn={this.state.signedIn}  onNavChange={this.onNavChange} userName={this.state.name}/>)
+        renderComp: (this.state.signedIn === false) ? <DefaultHome subpage="who-we-are" signedIn={this.state.signedIn}  onNavChange={this.onNavChange}/> : ((this.state.member_type === 'tutor') ? <TutorHome memberType={this.state.member_type} signedIn={this.state.signedIn}  onNavChange={this.onNavChange} id={this.state.id} userName={this.state.name}/>:<StudentHome memberType={this.state.member_type} signedIn={this.state.signedIn} id={this.state.id} userName={this.state.name}/>)
       },
       // "Why Hummingbird" subpage of home
       {
@@ -99,25 +102,35 @@ class App extends Component {
         path: "/register",
         renderComp: <Register signedIn={this.state.signedIn}  onNavChange={this.onNavChange} onSetEmail={this.onSetEmail} onSetName={this.onSetName} onSign={this.onSign}/>
       },
+      // Account Pages
       {
         path: "/account/",
         renderComp: <StudMyAccount signedIn={this.state.signedIn} />
       },
+      // My info
       {
         path: "/account/myinfo",
-        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} signedIn={this.state.signedIn} subpage='myinfo'/> : <StudMyAccount email={this.state.email} signedIn={this.state.signedIn} subpage='myinfo'/>
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo'/> : <StudMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo'/>
       },
+      // My Account Settings
       {
         path: "/account/settings",
         renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} subpage='settings'/> : <StudMyAccount signedIn={this.state.signedIn} subpage='settings'/>
       },
+      // Become a tutor
       {
         path: "/account/becomeatutor",
         renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="becomeatutor"/>
       },
+      // Tutor application
       {
         path: "/account/becomeatutor/apply",
         renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="tutorapply" email={this.state.email}/>
+      },
+      // Tutor's sessions
+      {
+        path: "/mysessions",
+        renderComp: <MySessions tutor_id={this.state.id}/>
       }
     ];
     return (

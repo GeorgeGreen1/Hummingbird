@@ -1,14 +1,38 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import NavBar from '../../Components/NavBar/NavBar';
-import banner from '../../Images/banner-img.png';
-
+import NameSearch from '../../Components/TutorSearch/NameSearch';
+import SubjectLevelSearch from '../../Components/TutorSearch/SubjectLevelSearch';
 
 // Displays information on becoming a tutor
 
+const initState = {
+    searchMode: "name",
+    nameQuery: "",
+    subjectQuery: "",
+    levelQUery: ""
+};
+
 class FindTutor extends Component{
+    constructor(props){
+        super(props);
+        this.state = initState;
+    }
+
     componentDidMount(){
     }
+
+    onNameClick = () => {
+        this.setState({searchMode:"name"})
+    }
+
+    onSubjLvlClick = () => {
+        this.setState({searchMode:"subj-lvl"})
+    }
+
+    onNameChange = (event) => {
+        this.setState({nameQuery: event.target.value})
+    }
+
     render(){
         return (
             <div>
@@ -16,8 +40,18 @@ class FindTutor extends Component{
                 (this.props.signedIn) ?
                 <div>
                     <div className="fg-hum">
-                        <h2> Find A Tutor </h2>
-                        <p> i think its hilarious u kids talking shit about harden. u wouldnt say this shit to him at lan, hes jacked. not only that but he wears the freshest clothes, eats at the chillest restaurants and hangs out with the hottest dudes. yall are pathetic lol</p>
+                        <div className="page-title"><h2 align="center"> Find A Tutor</h2></div>
+                        <p>Here is where you can search for tutors to contact. You can enter a query using either a specific name or a subject and level.</p>
+                        <div className="select-type">
+                            <h4>Please select type of search:</h4>
+                            <span className="type-bubble">
+                            <input type="radio" name="searchtype" value="" onClick={this.onNameClick} />By Name<br />
+                            </span>
+                            <span className="type-bubble">
+                            <input type="radio" name="searchtype" value="" onClick={this.onSubjLvlClick} />By Subject/Level<br />
+                            </span>
+                        </div>
+                        {(this.state.searchMode === "name") ? <NameSearch nameChange={this.onNameChange}/> : <SubjectLevelSearch />}
                     </div>
                 </div> :
                 <Redirect to="/" />}

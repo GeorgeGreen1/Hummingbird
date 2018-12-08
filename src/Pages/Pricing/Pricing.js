@@ -18,7 +18,7 @@ class Pricing extends Component{
           { (!this.props.signedIn) ?
             <div>
                 <div className="fg-hum">
-                    <h2 align="center"> Price Options </h2>
+                    <div className="page-title"><h2 align="center">Price Options</h2></div>
                     <p> As a student, you have several options prices depending on the number of tutoring hours you wish to purchase at a single time.
                         These options are split into three levels shown below. 
                     </p>

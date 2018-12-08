@@ -10,7 +10,8 @@ const initState = {
     enter_email: "",
     enter_password: "",
     enter_invalidEmail: "",
-    enter_invalidPassword: ""
+    enter_invalidPassword: "",
+    enter_invalidInfo: ""
 }
 
 class SignIn extends Component{
@@ -59,7 +60,11 @@ class SignIn extends Component{
                   password: this.state.enter_password
                 })
         }).then(res => res.json()).then(ret => {
-            this.props.onSign(true,ret.email,ret.firstname,ret.member_type);
+            if (ret === "Invalid Entry"){
+                this.setState({enter_invalidInfo:"active"})
+            }else{
+                this.props.onSign(true,ret.email,ret.firstname,ret.member_type,ret.id);
+            }
         }
         );
     }
@@ -73,15 +78,16 @@ class SignIn extends Component{
                     <div className="inner-present login-page">
                         <h3 align="center"> Sign In </h3>
                         <div className="entry-prompt">
-                            <label for="email">Email:</label>
-                            <input type="text" class="form-control" id="email" onChange={this.onUsernameChange}/>
+                            <label htmlFor="email">Email:</label>
+                            <input type="text" className="form-control" id="email" onChange={this.onUsernameChange}/>
                             <div className={"invalid-entry " + this.state.enter_invalidUsername}>Please enter a valid username!</div>
                         </div>
                         <div className="entry-prompt">
-                            <label for="password">Password:</label>
-                            <input type="password" class="form-control" id="password" onChange={this.onPasswordChange}/>
+                            <label htmlFor="password">Password:</label>
+                            <input type="password" className="form-control" id="password" onChange={this.onPasswordChange}/>
                             <div className={"invalid-entry " + this.state.enter_invalidPassword}>Please enter a valid password!</div>
-                            <a class="btn btn-orange btn-signin" href="#" role="button" onClick={this.onSignInButton}>Sign In</a>
+                            <a className="btn btn-orange btn-signin" href="#" role="button" onClick={this.onSignInButton}>Sign In</a> <br/>
+                            <div className={"invalid-entry " + this.state.enter_invalidInfo}>Invalid credentials! Please check the info you entered.</div>
                         </div>
                     </div>
                 </div>

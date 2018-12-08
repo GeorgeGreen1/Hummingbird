@@ -1,0 +1,38 @@
+.week-report{
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+}
+
+.week-report h4{
+    text-align: left;
+}
+
+tr:nth-child(odd){
+    background-color:#6290db;
+  }
+  tr:nth-child(even){
+    background-color:#3b69b8;
+  }
+
+table{
+    margin-bottom: 12px;
+}
+.btn-verif{
+    display: block;
+    width: 90px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-bottom: 20px;
+}
+.verif-cc{
+    display: inline-block;
+}
+
+.desp{
+    text-align: center;
+}
+.verf-label{
+    text-align: center;
+}

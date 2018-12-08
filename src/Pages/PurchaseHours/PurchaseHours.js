@@ -34,7 +34,7 @@ class PurchaseHours extends Component{
             { (this.props.signedIn) ?
             <div>
                 <div className="fg-hum">
-                    <h2 align="center"> Add Tutoring Hours </h2>
+                    <div className="page-title"><h2 align="center">Add Tutoring Hours</h2></div>
                     <div className="row pricing-window">
                         <div className="col-4">
                             <PriceDisplay package="Bronze" prices={prices.slice(0,4)} hours={hours.slice(0,4)}/>

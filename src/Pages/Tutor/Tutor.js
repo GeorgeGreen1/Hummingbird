@@ -16,7 +16,7 @@ class Tutor extends Component{
             { (!this.props.signedIn) ?
             <div>
                 <div className="fg-hum">
-                    <h2> Become A Tutor</h2>
+                    <div className="page-title"><h2 align="center">Become A Tutor</h2></div>
                     <div className="row">
                         <div className="col-7">
                             <p>If you wish to join our team of tutors, please follow the steps listed below:</p>

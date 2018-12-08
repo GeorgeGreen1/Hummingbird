@@ -16,9 +16,9 @@ class NavBar extends Component{
             (this.props.signedIn)?(
                 (this.props.member_type === 'tutor')?
                 {
-                    title: "Log Hours",
+                    title: "My Sessions",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
-                    route: "/findtutor",
+                    route: "/mysessions",
                     id: 1
                 }
                 :

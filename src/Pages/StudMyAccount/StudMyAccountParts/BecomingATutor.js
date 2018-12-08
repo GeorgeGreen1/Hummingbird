@@ -8,7 +8,9 @@ class BecomingATutor extends Component {
     render(){
         return (
             <div className='subpage-content'>
-                <h3>Becoming A Tutor</h3>
+                <div className="heading">
+                    <h3>Becoming A Tutor</h3>
+                </div>
                 <div className="descrip">
                 <a> If you're interested in becoming a tutor, you must fill out the application, providing all of the correct necessary information. 
                     We will review your application and contact you to inform you if we are interested in setting up an interview.

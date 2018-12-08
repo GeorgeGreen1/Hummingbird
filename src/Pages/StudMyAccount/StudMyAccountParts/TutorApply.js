@@ -6,7 +6,6 @@ import './StudMyAccountParts.css';
 class TutorApply extends Component {
 
     onTutor = () => {
-        console.log("Jeg Heter Tutor")
         fetch("http://localhost:3000/tutorize",{
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
