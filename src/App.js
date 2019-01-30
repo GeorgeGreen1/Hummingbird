@@ -20,11 +20,11 @@ import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
 const initState = {
 
   signedIn : true,
-  email: "cheek100@gmail.com",
-  name: "Tyler",
+  email: "maxd11@gmail.com",
+  name: "Tom",
   navbarElem: 0,
-  member_type: 'student',
-  id: 6
+  member_type: 'tutor',
+  id: 1
 }
 
 class App extends Component {

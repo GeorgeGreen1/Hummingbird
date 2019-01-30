@@ -23,7 +23,7 @@ class SubjectLevelSearch extends Component{
                     <div className="name-entry">
                         {/* <label htmlFor="name">Enter Tutor Name (First and/or Last):</label> */}
                         <span className="search-input search-dropdown">
-                        <select className="subj-select" onChange={this.onAddSubjChange}>
+                        <select className="subj-select" onChange={this.props.onAddSubjChange}>
                                 <option value="">Select Subject...</option>
                                 {this.state.subjects.map(item=>{
                                     return(<option>{item}</option>)
@@ -31,14 +31,13 @@ class SubjectLevelSearch extends Component{
                             </select>
                         </span>
                         <span className="search-input search-dropdown">
-                        <select className="subj-select" onChange={this.onAddSubjChange}>
+                        <select className="subj-select" onChange={this.props.onAddLvlChange}>
                                 <option value="">Select Level...</option>
                                 {this.state.subjects.map(item=>{
                                     return(<option>{item}</option>)
                                     })} 
                             </select>
                         </span>
-                        <span className="name-input"><a className="btn btn-orange btn-search" href="#" role="button" onClick={this.clicky}>Search</a></span>
                         <br/>
                     </div>
             </div>

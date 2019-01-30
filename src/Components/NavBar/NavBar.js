@@ -41,10 +41,10 @@ class NavBar extends Component{
                 //     route: "/findtutor"
                 // }
                 {
-                    title: "SPACE",
-                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
-                    route: "/addhours",
-                    id: 2
+                    title: "",
+                    listClass: "",
+                    route: "",
+                    id: 0
                 }
                 :
                 {

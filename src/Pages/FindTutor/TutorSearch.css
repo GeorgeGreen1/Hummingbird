@@ -20,19 +20,30 @@
 
 .search-input{
     margin-top: 10px;
-    display: inline-block;
+    display: block;
 }
-
 .search-bar{
-    width: 80%;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .btn-search{
     margin: 0 0 0 12px;
     height: 40px;
 }
-.search-dropdown{
-    margin-left: 20px;
+.search-dropdowns{
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.subj-select{
+    margin-top: 10px;
+    width:49%;
+}
+.subj-select.right{
+    float: right;
 }
 
 h4{
