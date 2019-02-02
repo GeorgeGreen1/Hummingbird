@@ -1,0 +1,67 @@
+h2{
+    font-size: 50px;
+    text-align: center;
+}
+h3{
+    margin-left: 10px;
+}
+
+.inner-present{
+    padding: 0px;
+}
+.head-display{
+    background-color: #ff903a;
+    height: 30px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    font-size: 22px;
+}
+table{
+    width: 100%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+th{
+    font-size: 24px;
+    font-weight: normal;
+    padding-left: 10px;
+}
+
+td{
+    font-size: 20px;
+    padding-left: 10px;;
+}
+tr:nth-child(odd){
+    background-color:#3162b6;
+}
+tr:nth-child(even){
+    background-color:#517ecb;
+}
+
+.hours-display{
+    width: 75%;
+    padding-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.hours-count a{
+    font-size: 60px;
+    line-height: 60px;
+}
+.hours-labela a{
+    font-size: 18px;
+    line-height: 18px;
+}
+.hours-labelb{
+    width: 80%;
+    margin: auto;
+}
+.hours-labelb a{
+    font-size: 14px;
+    /* line-height: 14px; */
+}

@@ -22,12 +22,23 @@ class NavBar extends Component{
                     id: 1
                 }
                 :
+                (
+                (this.props.member_type === 'tutor')?
                 {
                     title: "Find a Tutor",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
                     route: "/findtutor",
                     id: 1
-                }):{
+                }
+                :
+                {
+                    title: "Job Postings",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
+                    route: "/jobpostings",
+                    id: 1
+                }
+                )
+                ):{
                         title: "Pricing",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
                     route: "/pricing",
@@ -35,11 +46,6 @@ class NavBar extends Component{
                 },
             (this.props.signedIn)?(
                 (this.props.member_type === 'tutor')?
-                // {
-                //     title: "Log Hours",
-                //     listClass: "nav-item nav-main " + ((this.props.activeBtn===3)?"active":""),
-                //     route: "/findtutor"
-                // }
                 {
                     title: "",
                     listClass: "",
@@ -47,17 +53,42 @@ class NavBar extends Component{
                     id: 0
                 }
                 :
+                (
+                (this.props.member_type === 'admin')?
+                {
+                    title: "Logs",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
+                    route: "/adminlogs",
+                    id: 2
+                }
+                :
                 {
                     title: "Add Tutoring Hours",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
                     route: "/addhours",
                     id: 2
-                }):{
+                }
+                )
+                ):{
                     title: "Become A Tutor ",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
                     route: "/tutor",
                     id: 2
                 },
+                ((this.props.signedIn)&&(this.props.member_type === 'admin'))?
+                {
+                    title: "Tutor List",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===5)?"active":""),
+                    route: "/tutorlist",
+                    id: 5
+                }:
+                {
+                    title: "",
+                    listClass: "",
+                    route: "",
+                    id: 0
+                }
+            
         ].filter(item=>{return (item.route !== undefined)})
         // Items displayed on the right side of the nav bar
         let acctBarItems = [

@@ -7,8 +7,12 @@ import banner from './Images/banner-img.png';
 import NavBar from './Components/NavBar/NavBar';
 import DefaultHome from './Pages/DefaultHome/DefaultHome';
 import StudentHome from './Pages/StudentHome/StudentHome';
+import AdminHome from './Pages/AdminHome/AdminHome';
 import TutorHome from './Pages/TutorHome/TutorHome';
+import AdminLogs from './Pages/AdminLogs/AdminLogs';
+import JobPostings from './Pages/JobPostings/JobPostings';
 import Tutor from './Pages/Tutor/Tutor';
+import TutorList from './Pages/TutorList/TutorList';
 import Pricing from './Pages/Pricing/Pricing';
 import MySessions from './Pages/MySessions/MySessions';
 import PurchaseHours from './Pages/PurchaseHours/PurchaseHours';
@@ -18,7 +22,6 @@ import Register from './Pages/Register/Register';
 import StudMyAccount from './Pages/StudMyAccount/StudMyAccount';
 import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
 const initState = {
-
   signedIn : true,
   email: "maxd11@gmail.com",
   name: "Tom",
@@ -53,7 +56,7 @@ class App extends Component {
     [ // Default (not signed in) page
       {
         path: "/",
-        renderComp: (this.state.signedIn === false) ? <DefaultHome subpage="who-we-are" signedIn={this.state.signedIn}  onNavChange={this.onNavChange}/> : ((this.state.member_type === 'tutor') ? <TutorHome memberType={this.state.member_type} signedIn={this.state.signedIn}  onNavChange={this.onNavChange} id={this.state.id} userName={this.state.name}/>:<StudentHome memberType={this.state.member_type} signedIn={this.state.signedIn} id={this.state.id} userName={this.state.name}/>)
+        renderComp: (this.state.signedIn === false) ? <DefaultHome subpage="who-we-are" signedIn={this.state.signedIn}  onNavChange={this.onNavChange}/> : ((this.state.member_type === 'tutor') ? <TutorHome memberType={this.state.member_type} signedIn={this.state.signedIn}  onNavChange={this.onNavChange} id={this.state.id} userName={this.state.name}/>:((this.state.member_type === 'admin')? <AdminHome memberType={this.state.member_type} signedIn={this.state.signedIn} id={this.state.id} userName={this.state.name}/>:<StudentHome memberType={this.state.member_type} signedIn={this.state.signedIn} id={this.state.id} userName={this.state.name}/>))
       },
       // "Why Hummingbird" subpage of home
       {
@@ -131,7 +134,22 @@ class App extends Component {
       {
         path: "/mysessions",
         renderComp: <MySessions tutor_id={this.state.id}/>
-      }
+      },
+      // Logs for admins to see
+      {
+        path: "/adminlogs",
+        renderComp: <AdminLogs />
+      },
+      // Job Postings for admins to see
+      {
+        path: "/jobpostings",
+        renderComp: <JobPostings/>
+      },
+      // Tutor list for admins to see
+      {
+        path: "/tutorlist",
+        renderComp: <TutorList />
+      },
     ];
     return (
       <Router>

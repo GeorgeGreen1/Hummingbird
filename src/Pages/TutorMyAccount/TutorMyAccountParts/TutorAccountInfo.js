@@ -156,13 +156,14 @@ class TutorAccountInfo extends Component {
         this.setState({selectsubj: event.target.value});
     }
     onSubjRemoveClick = () =>{
-        const splitSelect = this.state.selectsubj.split("-")
+        const splitSelect = this.state.selectsubj.split("-");
+        console.log("Bow: " + splitSelect[0]);
         fetch("http://localhost:3000/rmtutorsubj",{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
                 id: this.props.id,
-                subj: this.state.subjects.indexOf(splitSelect[0].substr(0,splitSelect[0].length-1))+1,
+                subj: splitSelect[0]
             })
         }).then(rsp => {
                 const subjCurrent = this.state.mysubjects;

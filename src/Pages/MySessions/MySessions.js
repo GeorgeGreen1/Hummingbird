@@ -28,7 +28,7 @@ class MySessions extends Component{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
-                id: 2
+                id: this.props.tutor_id
             })
         }).then(response=>
                 response.json()
