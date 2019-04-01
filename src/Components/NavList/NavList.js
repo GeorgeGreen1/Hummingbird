@@ -11,8 +11,8 @@ const btns =
         btnName: "Who We Are"
     },
     {
-        route: "/why-hummingbird",
-        btnName: "Why Hummingbird?"
+        route: "/why-take-action",
+        btnName: "Why Take Action?"
     },
     {
         route: "/subjects",
@@ -45,6 +45,18 @@ const btns =
     {
         route: "/account/myinfo",
         btnName: "Alpha"
+    }],
+    [{
+        route: "/mysessions/logsession",
+        btnName: "Log Session"
+    },
+    {
+        route: "/mysessions/unverifiedlogs",
+        btnName: "Unverified Logs"
+    },
+    {
+        route: "/mysessions/all-logs",
+        btnName: "All Logs"
     }]
 ]
 ;
@@ -54,11 +66,16 @@ class NavList extends Component {
         if (this.props.btnSet === "home"){
             btnList = btns[0];
         }
-        else if (this.props.btnSet === "tutor"){
-            btnList = btns[2];
-        }else {
+        else if (this.props.btnSet === "account"){
             btnList = btns[1];
         }
+        else if (this.props.btnSet === "tutor"){
+            btnList = btns[2];
+        }
+        else if (this.props.btnSet === "logs"){
+            btnList = btns[3];
+        }
+
         return (
             <div className="navigation-list">
                 {btnList.map(item=> {

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import './TutorTable.css';
-class TutorTable extends Component {
+import './TutorTableStudent.css';
+import {Redirect} from 'react-router-dom';
+class TutorTableStudent extends Component {
     constructor(){
         super();
         this.state = {
@@ -67,32 +68,38 @@ class TutorTable extends Component {
         // (this.props.tutors.length > 0 && console.log('ror'));
         return(
             <div>
-            <table>
-                <thead>
-                    <tr>
-                    <th>Name</th>
-                    <th>Course</th>
-                    <th>Email</th>
-                    </tr>
-                </thead>
-                {this.props.tutors.length > 0 && this.state.selectedItems.map(item=>{
-                    return (<tr>
-                            <td>{(item.name==="")?<br/> : item.name}</td>
-                            <td>{item.course}</td>
-                            <td>{item.email}</td>
-                            </tr>)
-                })}
-            </table>
-            <div className="control">
-            {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
-            {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
-            </div>
+                {
+                (this.state.toUser)?
+                <Redirect to={"userprofile/"+this.state.userID}/>:
+                <div>
+                <table>
+                    <thead>
+                        <tr>
+                        <th>Name</th>
+                        <th>Course</th>
+                        <th>Email</th>
+                        </tr>
+                    </thead>
+                    {this.props.tutors.length > 0 && this.state.selectedItems.map(item=>{
+                        return (<tr className={(item.name!=="")?"member":""} onClick={()=>this.setState({toUser: true, userID: item.id})}>
+                                <td><a>{(item.name==="")?<br/> : item.name}</a></td>
+                                <td><a>{item.course}</a></td>
+                                <td><a>{item.email}</a></td>
+                                </tr>)
+                    })}
+                </table>
+                <div className="control">
+                {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
+                {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
+                </div>
+                </div>
+                }
             </div>
         )
     }
 }
 
-export default TutorTable;
+export default TutorTableStudent;
 
 
 

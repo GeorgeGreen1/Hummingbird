@@ -7,13 +7,13 @@ import './DefaultHomeParts.css';
 
 // Lists the advantages of being a Hummingbird customer
 
-class WhyHummingbird extends Component {
+class WhyTakeAction extends Component {
     render(){
         return (
             <div>
                  { (!this.props.signedIn) ?
                 <div className='subpage-content'>
-                    <h3> Why Hummingbird? </h3> <br/>
+                    <h3> Why Take Action? </h3> <br/>
                     <div class="scrollbar" id="style-8">
                         <div class="force-overflow">
                             <div className="row subpage-row">
@@ -54,4 +54,4 @@ class WhyHummingbird extends Component {
     }
 }
 
-export default WhyHummingbird;
+export default WhyTakeAction;

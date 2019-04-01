@@ -1,0 +1,28 @@
+/*Table Page Change Button */
+.btn-tableswitch{
+    display: block;
+    color:#fff;
+    width: 46%;
+    padding: 2px;
+    margin-top: 10px;
+    margin-left: 4px;
+    background-color:#517ecb;
+    border-radius: 5px;
+    transition: none;
+    float: left;
+  }
+  .btn-tableswitch.right{
+    float: right;
+  }
+  .btn-tableswitch:hover{
+    background-color:#1b50a6;
+    color: #fff;
+  }
+  .control{
+    width:18%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .find-tutor-button{
+    text-align: center;
+  }

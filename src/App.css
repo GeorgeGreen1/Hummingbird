@@ -5,10 +5,12 @@
 }
 /* Main canvas for each page, all non-static content is displayed here */
 .fg-hum{
+  display: block;
   background-color: #3b6ab9;
   color: #fff;
   margin: -15px 0px 5px 0px;
   padding: 15px 10px 10px 10px;
+
 }
 /* Descriptions on pages */
 .fg-hum p{
@@ -42,6 +44,7 @@
 /* Ensures container is 100% page height */
 .container{
   height: 100%;
+  min-width: 80%;
 }
 /* Universal button properties */
 .btn{
@@ -111,6 +114,7 @@
   transition: none;
 }
 
+
 .btn-orange.active{
   background-color: #f3ba7c;
 }
@@ -130,6 +134,16 @@
 .btn-blue:hover{
   background-color: #1b50a6;
   color: #fff;
+}
+
+.btn-search{
+  margin: 12px 0 0 12px;
+  height: 40px;
+}
+
+.btn-link{
+  margin: 12px 0 0 0;
+  height: 40px;
 }
 
 /* Tables */
@@ -157,6 +171,16 @@ tr:nth-child(odd){
 tr:nth-child(even){
   background-color:#3b69b8;
 }
+tr:nth-child(even).member:hover{
+  background-color:#3660a8;
+}
+tr:nth-child(odd).member:hover{
+  background-color:rgb(76, 123, 206);
+}
+tr.member td:hover{
+  cursor: pointer;
+}
+
 
 /*Additional Properties*/
 .center-img{

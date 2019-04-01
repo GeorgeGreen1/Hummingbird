@@ -27,11 +27,11 @@
     margin-right: auto;
     margin-left: auto;
 }
-
-.btn-search{
-    margin: 0 0 0 12px;
-    height: 40px;
+.request-bar{
+    width: 100%;
 }
+
+
 .search-dropdowns{
     width:50%;
     margin-left: auto;
@@ -48,4 +48,10 @@
 
 h4{
     margin-bottom: 10px;
+}
+
+.tutor-request{
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
 }

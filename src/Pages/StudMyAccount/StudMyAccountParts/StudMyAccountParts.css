@@ -21,7 +21,8 @@
 }
 .btn-account{
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: auto;
 }
 h3{

@@ -7,6 +7,7 @@ const initState = {
     zip: "",
     states:"",
     phone:"",
+    description: "",
     billAddress: "",
     alt_phone:"",
     meetAddress_loaded: "",
@@ -100,6 +101,9 @@ class TutorAccountInfo extends Component {
     onPhoneChange = (event) => {
         this.setState({phone: event.target.value})
     }
+    onDescriptionChange = (event) => {
+        this.setState({description: event.target.value})
+    }
     onMeetAddressChange = (event) => {
         this.setState({meetAddress: event.target.value})
     }
@@ -156,14 +160,13 @@ class TutorAccountInfo extends Component {
         this.setState({selectsubj: event.target.value});
     }
     onSubjRemoveClick = () =>{
-        const splitSelect = this.state.selectsubj.split("-");
-        console.log("Bow: " + splitSelect[0]);
+        const splitSelect = this.state.selectsubj.split("-")
         fetch("http://localhost:3000/rmtutorsubj",{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
                 id: this.props.id,
-                subj: splitSelect[0]
+                subj: this.state.subjects.indexOf(splitSelect[0].substr(0,splitSelect[0].length-1))+1,
             })
         }).then(rsp => {
                 const subjCurrent = this.state.mysubjects;
@@ -245,7 +248,8 @@ class TutorAccountInfo extends Component {
                 phone: this.state.phone,
                 billAddress: this.state.billAddress,
                 alt_phone: this.state.alt_phone,
-                id: this.props.id
+                id: this.props.id,
+                descr: this.state.description
             })
         }).then(response => 
             response.json())
@@ -258,6 +262,7 @@ class TutorAccountInfo extends Component {
                     phone_loaded: ret.phone,
                     billAddress_loaded: ret.bill_addr,
                     alt_phone_loaded: ret.alt_phone,
+                    description: ret.description
                 })
             })
         }
@@ -265,7 +270,7 @@ class TutorAccountInfo extends Component {
         return (
             <div className='subpage-content'>
                 <div className='primary-info'>
-                    <h3>My Info</h3>
+                    <h3>My Enfo</h3>
                     <div className="row">
                                 <div className="col-6">
                                     <div className="entry-prompt">
@@ -288,7 +293,13 @@ class TutorAccountInfo extends Component {
                                         <label for="alt-phone">Alternate Phone Number:</label>
                                         <input type="text" value={this.state.alt_phone} class="form-control" id="alt-phone" onChange={this.onAltPhoneChange} />
                                         {/* <div className={"invalid-entry " }>Please enter a valid phone number!</div> */}
-                                    </div>
+                                    </div> 
+                                </div>
+                                <div className="col-6">
+                                    <div className="entry-prompt">
+                                    <label htmlFor="description">Description:</label>
+                                    <textarea id="description" value={this.state.description} onChange={this.onDescriptionChange}/> 
+                                    </div> 
                                 </div>
                     </div>
                 </div>

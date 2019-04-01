@@ -21,6 +21,9 @@ import SignIn from './Pages/SignIn/SignIn';
 import Register from './Pages/Register/Register';
 import StudMyAccount from './Pages/StudMyAccount/StudMyAccount';
 import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
+import UserProfile from './Pages/UserProfile/UserProfile';
+import TutorLogs from './Pages/TutorLogs/TutorLogs';
+
 const initState = {
   signedIn : true,
   email: "maxd11@gmail.com",
@@ -35,7 +38,6 @@ class App extends Component {
     super();
     this.state = initState;
   }
-
 
   // Sets the sign in state, this will likely be moved to a single shared function
   onSign = (sign,email,firstname,member_type,id) => {
@@ -58,10 +60,10 @@ class App extends Component {
         path: "/",
         renderComp: (this.state.signedIn === false) ? <DefaultHome subpage="who-we-are" signedIn={this.state.signedIn}  onNavChange={this.onNavChange}/> : ((this.state.member_type === 'tutor') ? <TutorHome memberType={this.state.member_type} signedIn={this.state.signedIn}  onNavChange={this.onNavChange} id={this.state.id} userName={this.state.name}/>:((this.state.member_type === 'admin')? <AdminHome memberType={this.state.member_type} signedIn={this.state.signedIn} id={this.state.id} userName={this.state.name}/>:<StudentHome memberType={this.state.member_type} signedIn={this.state.signedIn} id={this.state.id} userName={this.state.name}/>))
       },
-      // "Why Hummingbird" subpage of home
+      // "Why Take Action" subpage of home
       {
-        path: "/why-hummingbird",
-        renderComp: <DefaultHome subpage="why-hummingbird" signedIn={this.state.signedIn}/>
+        path: "/why-take-action",
+        renderComp: <DefaultHome subpage="why-take-action" signedIn={this.state.signedIn}/>
       },
       // "Subjects" subpage of home
       {
@@ -87,12 +89,12 @@ class App extends Component {
       // Purchase Hours page
       {
         path: "/addhours",
-        renderComp: <PurchaseHours signedIn={this.state.signedIn} />
+        renderComp: <PurchaseHours signedIn={this.state.signedIn} memberType={this.state.member_type}/>
       },
       // Find a tutor page
       {
         path: "/findtutor",
-        renderComp: <FindTutor signedIn={this.state.signedIn}/>
+        renderComp: <FindTutor signedIn={this.state.signedIn} id={this.state.id} memberType={this.state.member_type}/>
       },
 
       // Sign in page
@@ -108,65 +110,81 @@ class App extends Component {
       // Account Pages
       {
         path: "/account/",
-        renderComp: <StudMyAccount signedIn={this.state.signedIn} />
+        renderComp: <StudMyAccount signedIn={this.state.signedIn} memberType={this.state.member_type}/>
       },
       // My info
       {
         path: "/account/myinfo",
-        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo'/> : <StudMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo'/>
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo' memberType={this.state.member_type}/> : <StudMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo' memberType={this.state.member_type}/>
       },
       // My Account Settings
       {
         path: "/account/settings",
-        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} subpage='settings'/> : <StudMyAccount signedIn={this.state.signedIn} subpage='settings'/>
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} subpage='settings' memberType={this.state.member_type}/> : <StudMyAccount signedIn={this.state.signedIn} subpage='settings' memberType={this.state.member_type}/>
       },
       // Become a tutor
       {
         path: "/account/becomeatutor",
-        renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="becomeatutor"/>
+        renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="becomeatutor" memberType={this.state.member_type}/>
       },
       // Tutor application
       {
         path: "/account/becomeatutor/apply",
-        renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="tutorapply" email={this.state.email}/>
+        renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="tutorapply" email={this.state.email} memberType={this.state.member_type}/>
       },
       // Tutor's sessions
+
+      //Log session
       {
-        path: "/mysessions",
-        renderComp: <MySessions tutor_id={this.state.id}/>
+        path: "/mysessions/logsession",
+        renderComp: <MySessions tutor_id={this.state.id} signedIn={this.state.signedIn} subpage="logsession" memberType={this.state.member_type}/>
       },
+      // Unverified logs
+      {
+        path: "/mysessions/unverifiedlogs",
+        renderComp: <MySessions tutor_id={this.state.id} signedIn={this.state.signedIn} subpage="unverifiedlogs" memberType={this.state.member_type}/>
+      },
+      // All logs
+      {
+        path: "/mysessions/all-logs",
+        renderComp: <MySessions tutor_id={this.state.id} signedIn={this.state.signedIn} subpage="all-logs" memberType={this.state.member_type}/>
+      },
+      
       // Logs for admins to see
       {
         path: "/adminlogs",
-        renderComp: <AdminLogs />
+        renderComp: <AdminLogs signedIn={this.state.signedIn} memberType={this.state.member_type}/>
       },
       // Job Postings for admins to see
       {
         path: "/jobpostings",
-        renderComp: <JobPostings/>
+        renderComp: <JobPostings signedIn={this.state.signedIn} memberType={this.state.member_type}/>
       },
       // Tutor list for admins to see
       {
         path: "/tutorlist",
-        renderComp: <TutorList />
-      },
+        renderComp: <TutorList signedIn={this.state.signedIn} memberType={this.state.member_type}/>
+      }
     ];
     return (
       <Router>
-        <div className="app container">
-            <img className="banner" src={banner} alt="banner" width='100%'/>
+        <div className="app">
+
+            {/* <img className="banner" src={banner} alt="banner" width='100%'/> */}
             <NavBar activeBtn={this.state.navbarElem} signedIn={this.state.signedIn} onSign={this.onSign} name={this.state.name} member_type={this.state.member_type} onNavChange={this.onNavChange}/>
-            {
-              // Sets up the actual routes for each page
-              routes.map(item => {
-                return(<Route exact path={item.path} render={()=>item.renderComp} />)
-              })
-            }
-            <footer class="footer">
-                <div class="container">
-                    <span> Hummingbird Tutoring &copy; 2018</span>
-                </div>
-            </footer>
+            <div className="container">
+              {// Sets up the actual routes for each page
+                routes.map(item => {
+                  return(<Route exact path={item.path} render={()=>item.renderComp} />)
+                })}
+            <Route exact path="/userprofile/:id" render={({match})=><UserProfile signedIn={this.state.signedIn} match={match} querier_type={this.state.member_type}/>}/>
+            <Route exact path="/tutorlogs/:id" render={({match})=><TutorLogs match={match} querier_type={this.state.member_type}/>}/>
+              <footer class="footer">
+                  <div class="container">
+                      <span> Take Action Tutoring &copy; 2019</span>
+                  </div>
+              </footer>
+            </div>
         </div>
       </Router>
     );

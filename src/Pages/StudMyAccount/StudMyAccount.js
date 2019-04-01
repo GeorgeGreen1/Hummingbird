@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavList from '../../Components/NavList/NavList';
 import StudAccountInfo from './StudMyAccountParts/StudAccountInfo';
@@ -23,19 +24,24 @@ class StudMyAccount extends Component{
             subpage=<TutorApply email={this.props.email}/>
         }
         return (
-            <div> 
-                 <div className="fg-hum">
-                    <div className="row">
-                        <div className="col-3">
-                            <NavList btnSet="account"/>
-                        </div>
-                        <div className="col-9">
-                            <div className="inner-present home-page">
-                                {subpage}
+            <div>
+                { (this.props.signedIn && (this.props.memberType==='student')) ?
+                <div> 
+                    <div className="fg-hum">
+                        <div className="row">
+                            <div className="col-3">
+                                <NavList btnSet="account"/>
+                            </div>
+                            <div className="col-9">
+                                <div className="inner-present home-page">
+                                    {subpage}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>:
+                <Redirect to="/" />
+                }
             </div>
         )
     }

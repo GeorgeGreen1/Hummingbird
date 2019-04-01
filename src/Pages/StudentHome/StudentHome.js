@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import TutorTable from '../../Components/TutorTable/TutorTable';
+import {Redirect} from 'react-router-dom';
+import TutorTableStudent from '../../Components/TutorTableStudent/TutorTableStudent';
 import NotifTable from '../../Components/NotifTable/NotifTable';
 import './StudentHome.css';
 
@@ -27,7 +28,8 @@ class StudentHome extends Component{
             let tuts = [];
             ret.map(item=>{
                 tuts.push({
-                    name: item.firstname,
+                    id: item.id,
+                    name: item.firstname + " " + item.lastname,
                     email: item.email,
                     course: item.course
                 });
@@ -42,23 +44,29 @@ class StudentHome extends Component{
         const hours = 20;
         return (
             <div>
-                <div className="fg-hum">
-                    <div className="page-title"><h2 align="center">Welcome, {this.props.userName}!</h2></div>
-                    <div className="row">
-                        <div className="col-7">
-                            <h3> My Tutors </h3>
-                            {this.state.tutors.length > 0 && <TutorTable tutors={this.state.tutors} />}
-                        </div>
-                        <div className="col-5">
-                            <NotifTable id={this.props.id}/>
-                            <div className="inner-present hours-display">
-                                <div className="head-display">Number of Hours Remaining:</div>
-                                <div className="hours-count"><a>{hours}</a></div>
-                                <div className="hours-labelb"><a>To add more hours, click on "Subscriptions" on the navigation bar.</a></div>
+                {
+                (this.props.signedIn && (this.props.memberType==='student')) ?
+                <div>
+                    <div className="fg-hum">
+                        <div className="page-title"><h2 align="center">Welcome, {this.props.userName}!</h2></div>
+                        <div className="row">
+                            <div className="col-7">
+                                <h3> My Tutors </h3>
+                                {this.state.tutors.length > 0 && <TutorTableStudent tutors={this.state.tutors} />}
+                            </div>
+                            <div className="col-5">
+                                <NotifTable id={this.props.id}/>
+                                <div className="inner-present hours-display">
+                                    <div className="head-display">Number of Hours Remaining:</div>
+                                    <div className="hours-count"><a>{hours}</a></div>
+                                    <div className="hours-labelb"><a>To add more hours, click on "Subscriptions" on the navigation bar.</a></div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>:
+                <Redirect to="/" />
+                }
             </div>
         );
     }

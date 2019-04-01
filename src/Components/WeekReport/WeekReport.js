@@ -5,7 +5,8 @@ class WeekReport extends Component{
     constructor(){
         super();
         this.state = {
-            verify_set: false
+            verify_set: false,
+            selectedPost: ""
         }
     }
 
@@ -35,6 +36,19 @@ class WeekReport extends Component{
         this.setState({verify_set: false});
     }
 
+    setSelection = (id) =>{
+        if (this.state.selectedPost === id){
+            this.setState({
+                selectedPost: ""
+            })
+        }
+        else{
+            this.setState({
+                selectedPost: id
+            })
+        }
+    }
+
     render() {
         const week_date = new Date(this.props.info[0]['week_of']);
         const verf = this.props.info[0]['verified']
@@ -45,22 +59,35 @@ class WeekReport extends Component{
                 <table>
                 <thead>
                     <tr>
-                    <th>Student</th>
-                    <th>Course</th>
+                    <th>Sessions</th>
+                    {/* <th>Course</th>
                     <th>Subject</th>
                     <th>Date</th>
-                    <th>Hours</th>
+                    <th>Hours</th> */}
                     </tr>
                 </thead>
-                {this.props.info.map(item=>{
+                {this.props.info.map((item,id)=>{
                     const sess_date = new Date(item.date)
                     return (
-                        <tr>
-                            <td>{item.lastname}, {item.firstname}</td>
+                        <tr className="member" onClick={(item.name==="")?null:()=>this.setSelection(id)}>
+                            {   
+                            (this.state.selectedPost !== id)?
+                            <td>
+                            {item.firstname} {item.lastname} <a className="post-date">{item.date}</a> <br/>
+                            </td>:
+                            <td>
+                            <b>Student:</b> {item.firstname} {item.lastname} <a className="post-date">{item.date}</a> <br/>
+                            <b>Course:</b> {item.course} <br/>
+                            <b>Subject:</b> {item.subject} <br/>
+                            <b>Total Hours: </b>{item.hours} <br/>
+                            <b>Comment: </b> {item.comment}
+                            </td>
+                            }
+                            {/* <td>{item.lastname}, {item.firstname}</td>
                             <td>{item.course}</td>
                             <td>{item.subject}</td>
                             <td>{sess_date.getMonth()+1}/{sess_date.getDate()}/{sess_date.getFullYear()}</td>
-                            <td>{item.hours}</td>
+                            <td>{item.hours}</td> */}
                         </tr>
                     )
                 })}

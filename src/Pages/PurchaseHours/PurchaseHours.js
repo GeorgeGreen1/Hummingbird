@@ -31,7 +31,7 @@ class PurchaseHours extends Component{
     render(){
         return (
             <div>
-            { (this.props.signedIn) ?
+            { (this.props.signedIn && (this.props.memberType==='student')) ?
             <div>
                 <div className="fg-hum">
                     <div className="page-title"><h2 align="center">Add Tutoring Hours</h2></div>

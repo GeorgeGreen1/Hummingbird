@@ -12,7 +12,7 @@ class Subjects extends Component {
                 <div className="subpage-center">
                     <img src={mplsstpaul} alt="skylines" height='212px'/>
                 </div>
-                Hummingbird is available in school districts all across the Minneapolis-St. Paul metropolitan area. If you wish to connect with a tutor remotely, please
+                Take Action Tutoring is available in school districts all across the Minneapolis-St. Paul metropolitan area. If you wish to connect with a tutor remotely, please
                 discuss with them your preferred means of communication and the resources needed for study material to be exchanged.
             </div>
         );

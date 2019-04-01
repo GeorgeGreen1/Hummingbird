@@ -259,8 +259,9 @@ class Register extends Component{
             { (!this.props.signedIn) ?
             <div>
                 <div className="fg-hum">
+                    <div className="page-title"><h2 align="center">Register</h2></div>
                    <div className="inner-present register-page">
-                        <h3 align="center"> Register </h3>
+                        <h3 align="center"> Basic Info: </h3>
                         <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">

@@ -10,6 +10,7 @@ class SelectStudent extends Component{
 
 
     componentDidMount(){
+        console.log("ID: " + this.props.id)
         fetch("http://localhost:3000/getstudents",{
         method: 'post',
         headers: {'Content-Type' : 'application/json'},

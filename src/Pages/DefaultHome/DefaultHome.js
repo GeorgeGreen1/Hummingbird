@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import NavBar from '../../Components/NavBar/NavBar';
 import './DefaultHome.css';
 import NavList from '../../Components/NavList/NavList'
 import banner from '../../Images/banner-img.png';
 import WhoWeAre from './DefaultHomeParts/WhoWeAre';
-import WhyHummingbird from './DefaultHomeParts/WhyHummingbird';
+import WhyTakeAction from './DefaultHomeParts/WhyTakeAction';
 import Subjects from './DefaultHomeParts/Subjects';
 import Locations from './DefaultHomeParts/Locations';
 
@@ -18,8 +19,8 @@ class DefaultHome extends Component{
         let subpage;
         if (currsubpage == 'who-we-are'){
             subpage = <WhoWeAre />
-        } else if (currsubpage == 'why-hummingbird'){
-            subpage = <WhyHummingbird />
+        } else if (currsubpage == 'why-take-action'){
+            subpage = <WhyTakeAction />
         } else if (currsubpage == 'subjects') {
             subpage = <Subjects />
         } else if (currsubpage == 'locations') {
@@ -27,7 +28,11 @@ class DefaultHome extends Component{
         }
         return (
             <div>
+                {
+                (!this.props.signedIn) ?
+                <div>
                 <div className="fg-hum">
+                    <div className="page-title"><h2 align="center">Welcome!</h2></div>
                     <div className="row">
                         <div className="col-3">
                             <NavList btnSet="home"/>
@@ -39,6 +44,9 @@ class DefaultHome extends Component{
                         </div>
                     </div>
                 </div>
+                </div>:
+                <Redirect to="/" />
+                }
             </div>
         );
     }

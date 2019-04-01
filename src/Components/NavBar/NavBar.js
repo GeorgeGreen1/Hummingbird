@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './NavBar.css';
-import humlogo from '../../Images/HummingbirdLogo.png';
+import takeActionLogo from '../../Images/TakeActionLogo.png';
 
 class NavBar extends Component{
     render() {
@@ -18,14 +18,14 @@ class NavBar extends Component{
                 {
                     title: "My Sessions",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
-                    route: "/mysessions",
+                    route: "/mysessions/logsession",
                     id: 1
                 }
                 :
                 (
-                (this.props.member_type === 'tutor')?
+                (this.props.member_type === 'student')?
                 {
-                    title: "Find a Tutor",
+                    title: "Find Tutoring Help",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===1)?"active":""),
                     route: "/findtutor",
                     id: 1
@@ -50,7 +50,7 @@ class NavBar extends Component{
                     title: "",
                     listClass: "",
                     route: "",
-                    id: 0
+                    id: 2   
                 }
                 :
                 (
@@ -122,7 +122,7 @@ class NavBar extends Component{
         return (
             <nav className="navbar navbar-expand navbar-dark bg-orange">
                 <div className="container">
-                <img src={humlogo} alt='hum-logo' width={175} />
+                <img src={takeActionLogo} alt='ta-logo' width={100} />
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

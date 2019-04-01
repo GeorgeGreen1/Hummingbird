@@ -75,8 +75,8 @@ class SignIn extends Component{
                 <div>
                 <div>
                 <div className="fg-hum">
+                    <div className="page-title"><h2 align="center">Sign In</h2></div>
                     <div className="inner-present login-page">
-                        <h3 align="center"> Sign In </h3>
                         <div className="entry-prompt">
                             <label htmlFor="email">Email:</label>
                             <input type="text" className="form-control" id="email" onChange={this.onUsernameChange}/>
