@@ -3,8 +3,6 @@ import {Redirect} from 'react-router-dom';
 import NavBar from '../../Components/NavBar/NavBar';
 import banner from '../../Images/banner-img.png';
 import AccountType from '../../Components/Register/AccountType';
-import '../SignIn/SignIn.css'
-import './Register.css';
 const initState = {
     email: "",
     firstName: "",
@@ -386,7 +384,7 @@ class Register extends Component{
                                 </div>
                             </div>
                         </div>
-                        <a className="btn btn-orange btn-signin" href="#" role="button" onClick={this.onRegisterClick}>Register</a><br/>
+                        <a className="btn btn-orange btn-block" href="#" role="button" onClick={this.onRegisterClick}>Register</a><br/>
                         <div className={"invalid-entry " + this.state.invalidRegInfo}>Invalid Registration Info. Please try a different email!</div>
                     </div>
                 </div>

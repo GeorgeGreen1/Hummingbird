@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import TutorTableStudent from '../../Components/TutorTableStudent/TutorTableStudent';
+import HomeTableStudent from '../../Components/HomeTableStudent/HomeTableStudent';
 import NotifTable from '../../Components/NotifTable/NotifTable';
 import './StudentHome.css';
 
@@ -15,7 +15,7 @@ class StudentHome extends Component{
     }
     // Retrieve the student's tutors upon mounting the component
     componentDidMount(){
-        fetch("http://localhost:3000/gettutors",{
+        fetch("http://localhost:3000/getstudentsessions",{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
@@ -25,13 +25,14 @@ class StudentHome extends Component{
         .then(response=>
             response.json()
         ).then(ret => {
+            console.log(ret);
             let tuts = [];
             ret.map(item=>{
                 tuts.push({
-                    id: item.id,
+                    date: item.date,
                     name: item.firstname + " " + item.lastname,
-                    email: item.email,
-                    course: item.course
+                    subject: item.subject,
+                    email: item.email
                 });
             })
             this.setState({tutors: tuts})
@@ -51,8 +52,8 @@ class StudentHome extends Component{
                         <div className="page-title"><h2 align="center">Welcome, {this.props.userName}!</h2></div>
                         <div className="row">
                             <div className="col-7">
-                                <h3> My Tutors </h3>
-                                {this.state.tutors.length > 0 && <TutorTableStudent tutors={this.state.tutors} />}
+                                <h3> My Recent Sessions </h3>
+                                {this.state.tutors.length > 0 && <HomeTableStudent tutors={this.state.tutors} />}
                             </div>
                             <div className="col-5">
                                 <NotifTable id={this.props.id}/>

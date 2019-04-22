@@ -3,7 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
-import banner from './Images/banner-img.png';
+import frontbanner from './Images/banner-img.png';
+import banner_1 from './Images/banner-img-1.png';
+import banner_2 from './Images/banner-img-2.png';
+import banner_3 from './Images/banner-img-3.png';
+import banner_4 from './Images/banner-img-4.png';
+import banner_5 from './Images/banner-img-5.png';
 import NavBar from './Components/NavBar/NavBar';
 import DefaultHome from './Pages/DefaultHome/DefaultHome';
 import StudentHome from './Pages/StudentHome/StudentHome';
@@ -24,19 +29,33 @@ import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
 import UserProfile from './Pages/UserProfile/UserProfile';
 import TutorLogs from './Pages/TutorLogs/TutorLogs';
 
+const bannerRotation = [banner_1,banner_2,banner_3,banner_4,banner_5];
 const initState = {
   signedIn : true,
-  email: "maxd11@gmail.com",
-  name: "Tom",
+  email: "urnes038@umn.edu",
+  name: "Jakob",
   navbarElem: 0,
   member_type: 'tutor',
-  id: 1
+  id: 16,
+  loaded: false
 }
 
 class App extends Component {
   constructor(){
     super();
     this.state = initState;
+  }
+
+  componentWillMount(){
+    const that = this;
+    let sqPaymentScript = document.createElement('script');
+    sqPaymentScript.src = "https://js.squareup.com/v2/paymentform";
+    sqPaymentScript.type = "text/javascript"
+    sqPaymentScript.async = false;
+    sqPaymentScript.onload = ()=>{that.setState({
+      loaded: true
+    })};
+    document.getElementsByTagName("head")[0].appendChild(sqPaymentScript);
   }
 
   // Sets the sign in state, this will likely be moved to a single shared function
@@ -89,7 +108,7 @@ class App extends Component {
       // Purchase Hours page
       {
         path: "/addhours",
-        renderComp: <PurchaseHours signedIn={this.state.signedIn} memberType={this.state.member_type}/>
+        renderComp: <PurchaseHours signedIn={this.state.signedIn} memberType={this.state.member_type} loaded={this.state.loaded}/>
       },
       // Find a tutor page
       {
@@ -139,11 +158,6 @@ class App extends Component {
         path: "/mysessions/logsession",
         renderComp: <MySessions tutor_id={this.state.id} signedIn={this.state.signedIn} subpage="logsession" memberType={this.state.member_type}/>
       },
-      // Unverified logs
-      {
-        path: "/mysessions/unverifiedlogs",
-        renderComp: <MySessions tutor_id={this.state.id} signedIn={this.state.signedIn} subpage="unverifiedlogs" memberType={this.state.member_type}/>
-      },
       // All logs
       {
         path: "/mysessions/all-logs",
@@ -169,10 +183,10 @@ class App extends Component {
     return (
       <Router>
         <div className="app">
-
             {/* <img className="banner" src={banner} alt="banner" width='100%'/> */}
             <NavBar activeBtn={this.state.navbarElem} signedIn={this.state.signedIn} onSign={this.onSign} name={this.state.name} member_type={this.state.member_type} onNavChange={this.onNavChange}/>
             <div className="container">
+            <img className="banner" src={bannerRotation[Math.floor(Math.random()*5)]} alt="banner" width='100%'/>
               {// Sets up the actual routes for each page
                 routes.map(item => {
                   return(<Route exact path={item.path} render={()=>item.renderComp} />)

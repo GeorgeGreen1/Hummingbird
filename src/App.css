@@ -1,7 +1,7 @@
 /* Properties of the banner above each page */
 .banner{
-  border-radius: 10px 10px 0px 0px;
-  margin: 0 0 -10px 0;
+  border-radius: 0;
+  margin: 0;
 }
 /* Main canvas for each page, all non-static content is displayed here */
 .fg-hum{
@@ -28,7 +28,7 @@
   margin-top: 10px;
   margin-bottom: 14px;
   width: 36%;
-  border-radius: 10px;
+  border-radius: 5px;
   border-bottom: 5px solid #ff6f22;
 }
 
@@ -123,6 +123,19 @@
   background-color: #ec8536;
   color: #fff;
 }
+
+.btn-block{
+  display:block;
+  background-color: #ff903a;
+  border-radius: 5px;
+  color: #fff;
+  width: 130px;
+  padding-top: 10px;
+  font-size: 24px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
 /* If never used, delete these */
 .btn-blue{
   background-color: #3b6ab9;
@@ -137,8 +150,14 @@
 }
 
 .btn-search{
+  background-color: #ff903a;
+  border-radius: 5px;
+  color: #fff;
+  width: 130px;
+  padding-top: 10px;
+  font-size: 24px;
+  padding-bottom: 10px;
   margin: 12px 0 0 12px;
-  height: 40px;
 }
 
 .btn-link{
@@ -191,7 +210,6 @@ tr.member td:hover{
 
 .hours-select{
   display: block;
-  margin-left: 32%;
 }
 
 .hours-select a{
@@ -280,3 +298,4 @@ select{
 {
 	background-color: #b0caf7;	
 }
+

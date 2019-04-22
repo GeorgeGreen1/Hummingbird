@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import PriceDisplay from '../../Components/PriceDisplay/PriceDisplay';
+import PaymentForm from '../../Components/PaymentForm/PaymentForm';
 import './PurchaseHours.css'
 
 const hours  = [10,14,18,22,24,28,32,36,48,60,80,100];
@@ -10,12 +11,17 @@ class PurchaseHours extends Component{
     constructor(){
         super();
         this.state = {
-            hoursState: 0
+            hoursState: 0,
+            loaded: false,
+            checkout: false
         };
     }
     
     componentDidMount(){
         // this.props.onNavChange(4);
+        this.setState({
+            loaded: this.props.loaded
+        })
     }
 
     // GET HOURS
@@ -46,8 +52,9 @@ class PurchaseHours extends Component{
                             <PriceDisplay package="Gold"  prices={prices.slice(8)} hours={hours.slice(8)}/>
                         </div>
                     </div>
+                    <div className="payment">
                     <div className="hours-select">
-                        <a className="ee" align="center"> Select Number of Hours: </a>
+                        <a> Select Number of Hours: </a>
                         <select class="price-select" id="state" onChange={this.onHoursChange} required="">
                             <option value="">Select...</option>
                             {hours.map(item=>{
@@ -58,7 +65,11 @@ class PurchaseHours extends Component{
                     <div className="current-price">
                     <a>Current Price: ${this.state.hoursState}.00</a>
                     </div>
-                    <a className="btn btn-checkout" href="#" role="button" onClick={this.pageDown}>Checkout</a>
+                    {(!this.state.checkout)&&<a className="btn btn-orange btn-checkout" href="#" role="button" onClick={()=>{this.setState({checkout: true})}}>Checkout</a>}
+                    {this.state.loaded && this.state.checkout && <PaymentForm paymentForm={ window.SqPaymentForm }
+                    />}
+                    { this.state.checkout &&<a className="btn btn-orange btn-checkout" href="#" role="button" onClick={()=>{this.setState({checkout: false})}}>Back</a>}
+                    </div>
                 </div>
             </div>:
             <Redirect to="/" />

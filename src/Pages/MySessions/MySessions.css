@@ -27,6 +27,30 @@ select{
     border-radius: 4px;
 }
 
+.react-time-picker__wrapper {
+    background-color: white;
+    border: none;
+    border-radius: 4px;
+}
+.react-time-picker__inputGroup__input.react-time-picker__inputGroup__hour{
+    min-width: 0.80em;
+    text-align: right;
+}
+
+.react-time-picker__inputGroup__divider{
+    color: black;
+}
+.react-time-picker__inputGroup__leadingZero{
+    color: black;
+}
+.tories{
+    background-color: blue;
+}
+
+.react-time-picker__inputGroup__input.react-time-picker__inputGroup__minute{
+    min-width: 0.9em;
+}
+
 .btn-add{
     display: block;
     width: 40%;

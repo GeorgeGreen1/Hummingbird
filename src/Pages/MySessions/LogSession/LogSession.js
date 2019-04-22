@@ -2,19 +2,17 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import SelectStudent from '../SelectStudent';
 import DatePicker from 'react-date-picker';
+import TimePicker from 'react-time-picker';
 
 // Displays information on becoming a tutor
-
-
-const subjects = ["Biology","History","Mathematics","Physics","Sociology"];
 
 const initState = {
     date: new Date(),
     subject: "",
-    student_id: "",
-    comments: "",
-    course: "",
-    hours: 0
+    email: "",
+    start_time: '12:00',
+    end_time: '13:00',
+    connections: []
 };
 
 class LogSession extends Component{
@@ -24,31 +22,38 @@ class LogSession extends Component{
     }
 
     componentDidMount(){
+        fetch("http://localhost:3000/gettutorconnections",{
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({
+                    id: this.props.tutor_id,
+                })
+            }).then(response=>
+                response.json()
+            )
+            .then( ret => {
+                console.log(ret);
+                this.setState({
+                    connections: ret
+                });
+            })
     }
 
     addToQueueButton = () => {
-        fetch("http://localhost:3000/addsession",{
+        fetch("http://localhost:3000/logsession",{
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify({
                     date: this.state.date,
                     subject: this.state.subject,
-                    student_id: this.state.student,
+                    email: this.state.email,
                     tutor_id: this.props.tutor_id,
-                    comments: this.state.comments,
-                    course: this.state.course,
-                    hours: this.state.hours,
-                    verified: false
+                    start_time: this.state.start_time,
+                    end_time: this.state.end_time,
                 })
         }).then( () => {
-            this.setState({
-                date: new Date(),
-                subject: "",
-                student_id: "",
-                comments: "",
-                course: "",
-                hours: 0,
-            });
+            this.setState(
+                initState);
         })
     }
 
@@ -56,52 +61,57 @@ class LogSession extends Component{
         this.setState({ date })
     }
 
-    onStudChange = (event) => {
-        this.setState({ student: parseInt(event.target.value.split(" ")[0]) })
+    onStartTimeChange = (start_time) => {
+        this.setState({ start_time })
+    }
+
+    onEndTimeChange = (end_time) => {
+        this.setState({ end_time })
+    }
+
+    onEmailChange = (event) => {
+        this.setState({ email: event.target.value.split(" ")[0] })
     }
     onSubjChange = (event) => {
         this.setState({ subject: event.target.value })
     }
-
-    onCourseChange = (event) => {
-        this.setState({ course: event.target.value})
-    }
-
-    onHoursChange = (event) => {
-        this.setState({ hours: event.target.value})
-    }
-
-    onCommentsChange = (event) => {
-        this.setState({ comments: event.target.value })
-    }
     
     render(){
+        console.log(this.state.email);
         return (
                 <div className="session-entry session-block">
                     <h3>Log New Session</h3>
                     <div className="session-input">
+                        <datalist id="connections">
+                            {
+                                this.state.connections.map(item=>{
+                                    return (<option value={item.email+" ("+item.firstname+" "+item.lastname+")"} />)
+                                })
+                            }
+                        </datalist>
                         <label htmlFor="date">Date:</label>
                         <div id="date"> 
                         <DatePicker className="cal1" value={this.state.date} onChange={this.onDateChange}/>
                         </div>
-                        <label htmlFor="subject">Subject:</label>
-                        <div id="subject">
-                            <select className="subject"  required="" onChange={this.onSubjChange}>
-                                <option value="">Select Subject...</option>
-                                {subjects.map(item=>{
-                                return(<option>{item}</option>)
-                                })}
-                            </select>
+                        <label htmlFor="start_time">Start Time:</label>
+                        <div id="start_time"> 
+                        <TimePicker
+                            onChange={this.onStartTimeChange}
+                            value={this.state.start_time}
+                        />
                         </div>
-                        <label htmlFor="student">Student:</label>
-                        <SelectStudent id={this.props.tutor_id} onStudChange={this.onStudChange}/>
-                        <label htmlFor="course">Course:</label>
-                        <input type="text" className="form-control log" id="course" onChange={this.onCourseChange}/>
-                        <label htmlFor="hours">Hours:</label>
-                        <input type="number" className="form-control log" min="1" max="24" id="course" onChange={this.onHoursChange}/>
-                        <label htmlFor="comments">Comments:</label>
-                        <textarea id="comments" onChange={this.onCommentsChange}/> 
-                        <a className="btn btn-orange btn-add" href="#" role="button" onClick={this.addToQueueButton}>Add to Queue</a>
+                        <label htmlFor="end_time">End Time:</label>
+                        <div id="end_time"> 
+                        <TimePicker
+                            onChange={this.onEndTimeChange}
+                            value={this.state.end_time}
+                        />
+                        </div>
+                        <label htmlFor="student-email">Student's Email:</label>
+                        <input type="text" className="form-control log" id="student-email" list="connections" onChange={this.onEmailChange}/>
+                        <label htmlFor="subject">Subject:</label>
+                        <input type="text" className="form-control log" id="subject" onChange={this.onSubjChange}/>
+                        <a className="btn btn-orange btn-add" href="#" role="button" onClick={this.addToQueueButton}>Log Session</a>
                     </div>
                 </div>
         );

@@ -3,7 +3,6 @@ import {Redirect} from 'react-router-dom';
 import './MySessions.css'
 import NavList from '../../Components/NavList/NavList';
 import LogSession from './LogSession/LogSession';
-import UnverifiedLogs from './UnverifiedLogs/UnverifiedLogs';
 import AllLogs from './AllLogs/AllLogs';
 
 
@@ -45,8 +44,7 @@ class MySessions extends Component{
                                 <div className="inner-present home-page">
                                     {(this.props.subpage==="logsession")?
                                     <LogSession tutor_id={this.props.tutor_id}/>:(
-                                        (this.props.subpage==="unverifiedlogs")?
-                                            <UnverifiedLogs />:<AllLogs />
+                                        <AllLogs />
                                     )}
                             </div>
                         </div>

@@ -270,7 +270,7 @@ class TutorAccountInfo extends Component {
         return (
             <div className='subpage-content'>
                 <div className='primary-info'>
-                    <h3>My Enfo</h3>
+                    <h3>My Info</h3>
                     <div className="row">
                                 <div className="col-6">
                                     <div className="entry-prompt">

@@ -51,10 +51,6 @@ const btns =
         btnName: "Log Session"
     },
     {
-        route: "/mysessions/unverifiedlogs",
-        btnName: "Unverified Logs"
-    },
-    {
         route: "/mysessions/all-logs",
         btnName: "All Logs"
     }]

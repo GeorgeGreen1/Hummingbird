@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import './TutorTableStudent.css';
+import './HomeTableStudent.css';
 import {Redirect} from 'react-router-dom';
-class TutorTableStudent extends Component {
+class HomeTableStudent extends Component {
     constructor(){
         super();
         this.state = {
@@ -65,7 +65,6 @@ class TutorTableStudent extends Component {
 
 
     render(){
-        // (this.props.tutors.length > 0 && console.log('ror'));
         return(
             <div>
                 {
@@ -76,15 +75,17 @@ class TutorTableStudent extends Component {
                     <thead>
                         <tr>
                         <th>Name</th>
-                        <th>Course</th>
+                        <th>Subject</th>
                         <th>Email</th>
+                        <th>Date</th>
                         </tr>
                     </thead>
                     {this.props.tutors.length > 0 && this.state.selectedItems.map(item=>{
-                        return (<tr className={(item.name!=="")?"member":""} onClick={()=>this.setState({toUser: true, userID: item.id})}>
+                        return (<tr className={(item.name!=="")?"member":""}>
                                 <td><a>{(item.name==="")?<br/> : item.name}</a></td>
-                                <td><a>{item.course}</a></td>
+                                <td><a>{item.subject}</a></td>
                                 <td><a>{item.email}</a></td>
+                                <td><a>{item.date}</a></td>
                                 </tr>)
                     })}
                 </table>
@@ -99,7 +100,7 @@ class TutorTableStudent extends Component {
     }
 }
 
-export default TutorTableStudent;
+export default HomeTableStudent;
 
 
 

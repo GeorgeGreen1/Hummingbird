@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import NavBar from '../../Components/NavBar/NavBar';
-import banner from '../../Images/banner-img.png';
-import './SignIn.css';
 import {Redirect} from 'react-router-dom';
 
 // The user sign in page. Sends a request to a server to retrieve user data and approve access
@@ -86,7 +83,7 @@ class SignIn extends Component{
                             <label htmlFor="password">Password:</label>
                             <input type="password" className="form-control" id="password" onChange={this.onPasswordChange}/>
                             <div className={"invalid-entry " + this.state.enter_invalidPassword}>Please enter a valid password!</div>
-                            <a className="btn btn-orange btn-signin" href="#" role="button" onClick={this.onSignInButton}>Sign In</a> <br/>
+                            <a className="btn btn-orange btn-block" href="#" role="button" onClick={this.onSignInButton}>Sign In</a> <br/>
                             <div className={"invalid-entry " + this.state.enter_invalidInfo}>Invalid credentials! Please check the info you entered.</div>
                         </div>
                     </div>

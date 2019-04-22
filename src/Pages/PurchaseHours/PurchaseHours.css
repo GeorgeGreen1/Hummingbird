@@ -8,18 +8,15 @@
 }
 
 .btn-checkout{
-    background-color: #ff903a;
     border-radius: 5px;
     color: #fff;
     width: 130px;
     padding-top: 10px;
     font-size: 24px;
     padding-bottom: 10px;
-    border-radius: 10px;
-    margin-left: 44%;
 }
 
-.btn-checkout:hover{
-    background-color:#f3ba7c;
-    color: #fff;
-  }
+.payment{
+    text-align: center;
+    padding-bottom: 10px;
+}
