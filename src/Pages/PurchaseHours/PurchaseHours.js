@@ -55,7 +55,7 @@ class PurchaseHours extends Component{
                     <div className="payment">
                     <div className="hours-select">
                         <a> Select Number of Hours: </a>
-                        <select class="price-select" id="state" onChange={this.onHoursChange} required="">
+                        <select className="price-select" id="state" onChange={this.onHoursChange} required="">
                             <option value="">Select...</option>
                             {hours.map(item=>{
                             return(<option>{item}</option>)
@@ -66,7 +66,7 @@ class PurchaseHours extends Component{
                     <a>Current Price: ${this.state.hoursState}.00</a>
                     </div>
                     {(!this.state.checkout)&&<a className="btn btn-orange btn-checkout" href="#" role="button" onClick={()=>{this.setState({checkout: true})}}>Checkout</a>}
-                    {this.state.loaded && this.state.checkout && <PaymentForm paymentForm={ window.SqPaymentForm }
+                    {this.state.loaded && this.state.checkout && <PaymentForm hoursState={this.props.hoursState} id={this.props.id} paymentForm={ window.SqPaymentForm }
                     />}
                     { this.state.checkout &&<a className="btn btn-orange btn-checkout" href="#" role="button" onClick={()=>{this.setState({checkout: false})}}>Back</a>}
                     </div>

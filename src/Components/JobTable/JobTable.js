@@ -39,8 +39,8 @@ class JobTable extends Component {
                     subject: "",
                     level: "",
                     school: "",
-                    // comments: "",
-                    date: ""
+                    date: "",
+                    request_id: -1
                 })
             }
             buildArr = this.props.postings.concat(buildArr);
@@ -82,9 +82,23 @@ class JobTable extends Component {
         }
     }
 
+    deletePosting = (index,request_id) =>{
+        if (this.state.postings.length){
+            fetch("http://localhost:3000/deleteposting",{
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({
+                    req_id: request_id
+                })
+            })
+            .then(()=>{
+                    window.location.reload();
+                }
+            )
+        }
+    }
+
     render(){
-        // (this.props.postings.length > 0 && console.log('ror'));
-        console.log(this.state.userID);
         return(
             <div>
                 {
@@ -108,7 +122,8 @@ class JobTable extends Component {
                                     Course: {item.course} <br/>
                                     Subject: {item.subject} {item.level} <br/>
                                     School: {item.school} <br/>
-                                    Comments: {item.comments} 
+                                    Comments: {item.comments} <br/>
+                                    <a className="btn btn-orange posting-delete" href="#" role="button" onClick={()=>this.deletePosting(this.state.postings.indexOf(item),item.request_id)}>X</a>
                                 </td>}
                                 </tr>)
                     })}

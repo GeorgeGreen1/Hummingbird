@@ -193,15 +193,15 @@ class StudAccountInfo extends Component {
                 <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="phone">Phone (XXX-XXX-XXXX):</label>
-                                    <input type="text" value={this.state.phone} class="form-control" id="phone" onChange={this.onPhoneChange} />
+                                    <label htmlFor="phone">Phone (XXX-XXX-XXXX):</label>
+                                    <input type="text" value={this.state.phone} className="form-control" id="phone" onChange={this.onPhoneChange} />
                                     <div className={"invalid-entry " }>Please enter a valid phone number!</div>
                                 </div>
                             </div>
                             <div className="col-6"> 
                                 <div className="entry-prompt">
-                                    <label for="meetAddress">Preferred Meeting Address:</label>
-                                    <input type="text" value={this.state.meetAddress} class="form-control" id="meetAddress" onChange={this.onMeetAddressChange}/>
+                                    <label htmlFor="meetAddress">Preferred Meeting Address:</label>
+                                    <input type="text" value={this.state.meetAddress} className="form-control" id="meetAddress" onChange={this.onMeetAddressChange}/>
                                     <div className={"invalid-entry " }>Please enter a meeting address!</div>
                                 </div>
                             </div>
@@ -209,8 +209,8 @@ class StudAccountInfo extends Component {
                 <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="alt-phone">Alternate Phone Number:</label>
-                                    <input type="text" value={this.state.alt_phone} class="form-control" id="alt-phone" onChange={this.onAltPhoneChange} />
+                                    <label htmlFor="alt-phone">Alternate Phone Number:</label>
+                                    <input type="text" value={this.state.alt_phone} className="form-control" id="alt-phone" onChange={this.onAltPhoneChange} />
                                     {/* <div className={"invalid-entry " }>Please enter a valid phone number!</div> */}
                                 </div>
                             </div>
@@ -222,15 +222,15 @@ class StudAccountInfo extends Component {
                 <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="billAddress">Billing Address:</label>
-                                    <input type="text" value={this.state.billAddress} class="form-control" id="billAddress" onChange={this.onBillAddressChange} />
+                                    <label htmlFor="billAddress">Billing Address:</label>
+                                    <input type="text" value={this.state.billAddress} className="form-control" id="billAddress" onChange={this.onBillAddressChange} />
                                     {/* <div className={"invalid-entry " }>Please enter a valid city!</div> */}
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="city">City:</label>
-                                    <input type="text" value={this.state.city} class="form-control" id="city" onChange={this.onCityChange} />
+                                    <label htmlFor="city">City:</label>
+                                    <input type="text" value={this.state.city} className="form-control" id="city" onChange={this.onCityChange} />
                                     <div className={"invalid-entry " }>Please enter a valid city!</div>
                                 </div>
                             </div>
@@ -238,8 +238,8 @@ class StudAccountInfo extends Component {
                 <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                <label for="states">State:</label><br/>
-                                <select class="date-select month-select" value={this.state.states} id="states" onChange={this.onStatesChange} required="">
+                                <label htmlFor="states">State:</label><br/>
+                                <select className="date-select month-select" value={this.state.states} id="states" onChange={this.onStatesChange} required="">
                                     <option value="">State</option>
                                     {states.map(item=>{
                                     return(<option>{item}</option>)
@@ -250,8 +250,8 @@ class StudAccountInfo extends Component {
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="zip">ZIP Code:</label>
-                                    <input type="text" value={this.state.zip} class="form-control" id="zip" onChange={this.onZipChange} />
+                                    <label htmlFor="zip">ZIP Code:</label>
+                                    <input type="text" value={this.state.zip} className="form-control" id="zip" onChange={this.onZipChange} />
                                     <div className={"invalid-entry " }>Please enter a valid ZIP code!</div>
                                 </div>
                             </div>

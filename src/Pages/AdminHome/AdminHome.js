@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import NotifTable from '../../Components/NotifTable/NotifTable';
+import PageTable from '../../Components/PageTable/PageTable';
 import './AdminHome.css';
 
 // The homepage for a signed in student account
@@ -28,6 +29,7 @@ class AdminHome extends Component{
                         <div className="page-title"><h2 align="center">Welcome, {this.props.userName}!</h2></div>
                         <div className="row">
                             <div className="col-7">
+                                <PageTable redirectLvl="" pageLength={12} tableCtgs={["A","B","C"]} entries={[{"alpha":1,"delta":2,"bravo":3}]} dispKeys={["alpha","delta","bravo"]}/>
                             </div>
                             <div className="col-5">
                                 <NotifTable id={this.props.id}/>

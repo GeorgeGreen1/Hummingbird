@@ -12,8 +12,6 @@ import Locations from './DefaultHomeParts/Locations';
 // What the user sees by default upon loading the web page, basic information can be accessed here
 
 class DefaultHome extends Component{
-    componentDidMount(){
-    }
     render(){
         const currsubpage = this.props.subpage;
         let subpage;

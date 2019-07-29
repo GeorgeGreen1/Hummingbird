@@ -23,6 +23,7 @@ const initState = {
     zip: "",
     states:"",
     phone:"",
+    member_type: "student",
     invalidDOB: "",
     invalidMeetAddress: "",
     invalidBillAddress: "",
@@ -45,6 +46,15 @@ class Register extends Component{
       }
 
     componentDidMount(){
+    }
+
+    onMemberTypeChange = (num) =>{
+        if (num === 0){
+            this.setState({member_type: "student"})
+        }
+        else {
+            this.setState({member_type: "tutor"})
+        }
     }
     // Changes the Email state
     onEmailChange = (event) => {
@@ -263,15 +273,15 @@ class Register extends Component{
                         <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="email">E-mail:</label>
-                                    <input type="text" class="form-control" id="email" onChange={this.onEmailChange} />
+                                    <label htmlFor="email">E-mail:</label>
+                                    <input type="text" className="form-control" id="email" onChange={this.onEmailChange} />
                                     <div className={"invalid-entry " + this.state.invalidEmail}>Please enter a valid email address!</div>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="phone">Phone (XXX-XXX-XXXX):</label>
-                                    <input type="text" class="form-control" id="phone" onChange={this.onPhoneChange} />
+                                    <label htmlFor="phone">Phone (XXX-XXX-XXXX):</label>
+                                    <input type="text" className="form-control" id="phone" onChange={this.onPhoneChange} />
                                     <div className={"invalid-entry " + this.state.invalidPhone}>Please enter a valid Phone Number!</div>
                                 </div>
                             </div>
@@ -279,15 +289,15 @@ class Register extends Component{
                         <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" onChange={this.onPasswordChange}/>
+                                    <label htmlFor="password">Password:</label>
+                                    <input type="password" className="form-control" id="password" onChange={this.onPasswordChange}/>
                                     <div className={"invalid-entry " + this.state.invalidPassword}>Please enter a valid password!</div>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="repeat-password">Repeat Password:</label>
-                                    <input type="password" class="form-control" id="repeat-password" onChange={this.onPasswordRepeatChange}/>
+                                    <label htmlFor="repeat-password">Repeat Password:</label>
+                                    <input type="password" className="form-control" id="repeat-password" onChange={this.onPasswordRepeatChange}/>
                                     <div className={"invalid-entry " + this.state.invalidPassMatch}>Please enter matching passwords!</div>
                                 </div>
                             </div>
@@ -295,15 +305,15 @@ class Register extends Component{
                         <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="firstname">First Name:</label>
-                                    <input type="text" class="form-control" id="firstname" onChange={this.onFirstNameChange}/>
+                                    <label htmlFor="firstname">First Name:</label>
+                                    <input type="text" className="form-control" id="firstname" onChange={this.onFirstNameChange}/>
                                     <div className={"invalid-entry " + this.state.invalidFirstName}>Please enter a valid first name!</div>
                                </div>
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="lastname">Last Name:</label>
-                                    <input type="text" class="form-control" id="lastname" onChange={this.onLastNameChange}/>
+                                    <label htmlFor="lastname">Last Name:</label>
+                                    <input type="text" className="form-control" id="lastname" onChange={this.onLastNameChange}/>
                                     <div className={"invalid-entry " + this.state.invalidLastName}>Please enter a valid last name!</div>
                                 </div>
                             </div>
@@ -311,21 +321,21 @@ class Register extends Component{
                         <div className="row">
                             <div className="col-6">
                             <div className="entry-prompt">
-                                <label for="birthdate">Date of Birth:</label>
+                                <label htmlFor="birthdate">Date of Birth:</label>
                                 <div id="birthdate">
-                                <select class="date-select month-select" id="month" onChange={this.onMonthChange} required="">
+                                <select className="date-select month-select" id="month" onChange={this.onMonthChange} required="">
                                 <option value="">Month</option>
                                 {months.map(item=>{
                                 return(<option>{item}</option>)
                                 })}
                                 </select>
-                                <select class="date-select day-select" id="day" onChange={this.onDayChange} required="">
+                                <select className="date-select day-select" id="day" onChange={this.onDayChange} required="">
                                 <option value="">Day</option>
                                 {this.days(this.state.month).map(item=>{
                                 return(<option>{item}</option>)
                                 })}
                                 </select>
-                                <select class="date-select year-select" id="year" onChange={this.onYearChange} required="">
+                                <select className="date-select year-select" id="year" onChange={this.onYearChange} required="">
                                 <option value="">Year</option>
                                 {this.years().map(item=>{
                                 return(<option>{item}</option>)
@@ -338,8 +348,8 @@ class Register extends Component{
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                    <label for="meet-address">Preferred Meeting Address:</label>
-                                    <input type="text" class="form-control" id="meet-address" onChange={this.onMeetAddressChange} />
+                                    <label htmlFor="meet-address">Preferred Meeting Address:</label>
+                                    <input type="text" className="form-control" id="meet-address" onChange={this.onMeetAddressChange} />
                                     <div className={"invalid-entry " + this.state.invalidMeetAddress}>Please enter a valid meeting address!</div>
                                 </div>
                             </div> 
@@ -350,15 +360,15 @@ class Register extends Component{
                         <div className="row">
                             <div className="col-6">
                                <div className="entry-prompt">
-                                    <label for="bill-address">Billing Address:</label>
-                                    <input type="text" class="form-control" id="bill-address" onChange={this.onBillAddressChange} />
+                                    <label htmlFor="bill-address">Billing Address:</label>
+                                    <input type="text" className="form-control" id="bill-address" onChange={this.onBillAddressChange} />
                                     <div className={"invalid-entry " + this.state.invalidBillAddress}>Please enter a valid billing address!</div>
                                 </div>
                             </div>
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                        <label for="city">City:</label>
-                                        <input type="text" class="form-control" id="city" onChange={this.onCityChange} />
+                                        <label htmlFor="city">City:</label>
+                                        <input type="text" className="form-control" id="city" onChange={this.onCityChange} />
                                         <div className={"invalid-entry " + this.state.invalidCity}>Please enter a valid city!</div>
                                 </div>
                             </div>
@@ -366,8 +376,8 @@ class Register extends Component{
                         <div className="row">
                             <div className="col-6">
                                 <div className="entry-prompt">
-                                <label for="states">State:</label><br/>
-                                <select class="date-select month-select" id="states" onChange={this.onStatesChange} required="">
+                                <label htmlFor="states">State:</label><br/>
+                                <select className="date-select month-select" id="states" onChange={this.onStatesChange} required="">
                                     <option value="">State</option>
                                     {states.map(item=>{
                                     return(<option>{item}</option>)
@@ -378,12 +388,13 @@ class Register extends Component{
                             </div>
                             <div className="col-6">
                                <div className="entry-prompt">
-                                        <label for="zip">ZIP Code:</label>
-                                        <input type="text" class="form-control" id="zip" onChange={this.onZipChange} />
+                                        <label htmlFor="zip">ZIP Code:</label>
+                                        <input type="text" className="form-control" id="zip" onChange={this.onZipChange} />
                                         <div className={"invalid-entry " + this.state.invalidZip}>Please enter a valid ZIP code!</div>
                                 </div>
                             </div>
                         </div>
+                        <AccountType />
                         <a className="btn btn-orange btn-block" href="#" role="button" onClick={this.onRegisterClick}>Register</a><br/>
                         <div className={"invalid-entry " + this.state.invalidRegInfo}>Invalid Registration Info. Please try a different email!</div>
                     </div>

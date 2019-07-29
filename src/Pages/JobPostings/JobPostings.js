@@ -29,15 +29,14 @@ class JobPostings extends Component{
             let postings = [];
             ret.map(item=>{
                 let dt = new Date(item.date)
-                console.log(dt);
                 postings.push({
-                    id: item.user_id,
                     name: item.stud_name,
-                    subject: item.subject + " - "+ item.level,
                     course: item.course,
+                    subject: item.subject + " - " + item.level,
                     school: item.school,
+                    date: (dt.getMonth()+1) + "/" + dt.getDate() + "/" + dt.getFullYear(),
                     comments: item.comments,
-                    date: (dt.getMonth()+1) + "-" + dt.getDate() + "-" + dt.getFullYear()
+                    request_id: item.request_id
                 });
             })
             this.setState({postings: postings})

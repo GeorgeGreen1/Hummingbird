@@ -14,8 +14,8 @@ class Subjects extends Component {
             { (!this.props.signedIn) ?
             <div className='subpage-content'>
                 <h3> Available Subjects </h3> <br/>
-                <div class="scrollbar" id="style-8">
-				<div class="force-overflow">
+                <div className="scrollbar" id="style-8">
+				<div className="force-overflow">
                 <div className="row subpage-row">
                     <div className="col-9">
                     <h4><b>Math and Science</b></h4>

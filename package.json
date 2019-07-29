@@ -5,7 +5,6 @@
   "dependencies": {
     "bcrypt": "^3.0.0",
     "lodash": "^4.17.11",
-    "quickbooks": "^1.0.4",
     "react": "^16.4.2",
     "react-date-picker": "^7.0.0",
     "react-dom": "^16.4.2",
@@ -16,7 +15,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "jest",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }

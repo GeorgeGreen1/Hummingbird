@@ -54,18 +54,18 @@ class NavBar extends Component{
                 }
                 :
                 (
-                (this.props.member_type === 'admin')?
-                {
-                    title: "Logs",
-                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
-                    route: "/adminlogs",
-                    id: 2
-                }
-                :
+                (this.props.member_type === 'student')?
                 {
                     title: "Add Tutoring Hours",
                     listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
                     route: "/addhours",
+                    id: 2
+                }
+                :
+                {
+                    title: "Match Users",
+                    listClass: "nav-item nav-main " + ((this.props.activeBtn===2)?"active":""),
+                    route: "/matchusers",
                     id: 2
                 }
                 )
@@ -75,19 +75,26 @@ class NavBar extends Component{
                     route: "/tutor",
                     id: 2
                 },
-                ((this.props.signedIn)&&(this.props.member_type === 'admin'))?
-                {
-                    title: "Tutor List",
-                    listClass: "nav-item nav-main " + ((this.props.activeBtn===5)?"active":""),
-                    route: "/tutorlist",
-                    id: 5
-                }:
-                {
-                    title: "",
-                    listClass: "",
-                    route: "",
-                    id: 0
-                }
+                ((this.props.signedIn)&&(this.props.member_type !== 'tutor'))?(
+                    (this.props.member_type === 'admin')?
+                    {
+                        title: "User Search",
+                        listClass: "nav-item nav-main " + ((this.props.activeBtn===5)?"active":""),
+                        route: "/adminsearch/adminalluserssearch",
+                        id: 5
+                    }:
+                    {
+                        title: "My Past Sessions",
+                        listClass: "nav-item nav-main " + ((this.props.activeBtn===5)?"active":""),
+                        route: "/mysessionsstudent",
+                        id: 5
+                    }):
+                    {
+                        title: "",
+                        listClass: "",
+                        route: "",
+                        id: 0
+                    }
             
         ].filter(item=>{return (item.route !== undefined)})
         // Items displayed on the right side of the nav bar

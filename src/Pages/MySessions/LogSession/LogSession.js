@@ -22,7 +22,7 @@ class LogSession extends Component{
     }
 
     componentDidMount(){
-        fetch("http://localhost:3000/gettutorconnections",{
+        fetch("http://localhost:3000/getmystudents",{
                 method: 'post',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify({

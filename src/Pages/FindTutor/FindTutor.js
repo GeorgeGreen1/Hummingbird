@@ -5,7 +5,7 @@ import './FindTutor.css';
 // Displays information on becoming a tutor
 
 const subjects = ["Math","Science","History","English","Spanish","Calculus","Physics","Chemistry","Biology","Music","Art"];
-const levels = ["Beginner","Intermediate","Expert"]
+const levels = ["Elementary","Middle School","High School","College"];
 
 const initState = {
     searchMode: "name",

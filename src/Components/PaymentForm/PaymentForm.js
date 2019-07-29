@@ -150,7 +150,9 @@ class PaymentForm extends Component {
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
-                nonce:  nonce
+                nonce:  nonce,
+                id: this.props.id,
+                hours_added: this.props.hoursState
             })
           })
         },

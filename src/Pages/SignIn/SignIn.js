@@ -60,6 +60,7 @@ class SignIn extends Component{
             if (ret === "Invalid Entry"){
                 this.setState({enter_invalidInfo:"active"})
             }else{
+                localStorage.setItem('token',ret.token)
                 this.props.onSign(true,ret.email,ret.firstname,ret.member_type,ret.id);
             }
         }

@@ -4,7 +4,14 @@ import './UserProfile.css'
 
 // Shows the different pricing options that are available to users
 
-
+const levels = ["Elementary","Middle School","High School","College"];
+const education = [
+    "H.S. Diploma or Equivalent",
+    "Associate's Degree",
+    "Bachelor's Degree",
+    "Master's Degree",
+    "Doctorate"
+];
 class UserProfile extends Component{
     constructor(){
         super();
@@ -17,6 +24,8 @@ class UserProfile extends Component{
             bill_addr: "",
             zip: "",
             id: -1,
+            edu: "",
+            years_exp: "",
             subjList: [],
             lvlList: [],
             member_type: "",
@@ -30,36 +39,42 @@ class UserProfile extends Component{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
-                id: this.props.match.params.id,
-                member_type: this.props.match.params.membertype,
+                querier_id: this.props.id,
+                profile_id: this.props.match.params.id,
                 querier_type: this.props.querier_type   
             })
         })
         .then(response=>
             response.json()
-        ).then(ret => {
-            let elem = ret[0];
-            this.setState({
-                name: elem.firstname + " " + elem.lastname,
-                email: elem.email,
-                phone: elem.phone,
-                city: elem.city,
-                ste: elem.state,
-                zip: elem.zip,
-                member_type: elem.member_type
-            })
-            if (elem.member_type === 'tutor'){
-                this.setState({
-                    subjList: elem.subject,
-                    lvlList: elem.level,
-                    desc: elem.description
-                })
+        ).then(elem => {
+            if (elem === null){
+                this.setState({redirect: true});
             }
-            if (this.props.querier_type === 'admin'){
+            else{
                 this.setState({
-                    bill_addr: elem.bill_addr,
-                    id: elem.id
+                    name: elem.firstname + " " + elem.lastname,
+                    email: elem.email,
+                    phone: elem.phone,
+                    member_type: elem.member_type
                 })
+                if (elem.member_type === 'tutor'){
+                    this.setState({
+                        subjList: elem.subject,
+                        lvlList: elem.level,
+                        desc: elem.description
+                    })
+                }   
+                if (this.props.querier_type === 'admin'){
+                    this.setState({
+                        bill_addr: elem.bill_addr,
+                        city: elem.city,
+                        ste: elem.state,
+                        zip: elem.zip,
+                        id: elem.id,
+                        edu: elem.edu_earned,
+                        years_exp: elem.years_exp
+                    })
+                }
             }
         }
         )
@@ -76,10 +91,10 @@ class UserProfile extends Component{
         return aggSubjLvl;
     }
 
-    getExpList(subjLvlList){
+    getExpertiseList(subjLvlList){
         let n = subjLvlList.length;
         return subjLvlList.map((item,i) => {
-            return (item.subject + " - " + item.level + ((i<(n-1))?", ":""))
+            return (item.subject + " - " + levels[item.level] + ((i<(n-1))?", ":""))
         })
     }
 
@@ -92,16 +107,26 @@ class UserProfile extends Component{
     render(){
         return (
           <div>  
-          { (this.props.signedIn && ( (this.props.querier_type==='admin')|| ((this.props.querier_type==='tutor')&&(this.props.member_type==='student')) )) ?
+          { (this.props.signedIn 
+          
+          //&& ( (this.props.querier_type==='admin')|| ((this.props.querier_type==='tutor')&&(this.props.member_type==='student')) )
+          
+          ) ?
             (
             (this.state.redirect)?
-            <Redirect to={"../tutorlogs/"+this.state.id}/>
+            <Redirect to="/"/>
             :
             <div>
                 <div className="fg-hum">
                     <div className="page-title"><h2 align="center">User Profile</h2></div>
                     <div className="inner-present home-page">
-                    <h2>{this.state.name}</h2>
+                    <h2>{this.state.name}</h2>                    
+                    <p><b>{this.state.member_type.toUpperCase()}</b></p>
+                    {
+                    (this.props.querier_type!=='admin')?
+                    <span><p><b>Email:</b> {this.state.email}</p></span>
+                    :
+                    <div>
                     <div className="row profile">
                         <div className="col-6">
                             <b>Email:</b> {this.state.email}
@@ -112,20 +137,31 @@ class UserProfile extends Component{
                     </div>
                     <div className="row profile">
                         <div className="col-6">
+                            <b>Years of Experience:</b> {this.state.years_exp}
+                        </div>
+                        <div className="col-6">
+                            <b>Education Earned:</b> {education[this.state.edu]}
+                        </div>
+                    </div>
+                    <div className="row profile">
+                        <div className="col-6">
                             <b>Location:</b> {this.state.city}, {this.state.ste}
                         </div>
                         {/* Organization needs to be different for non-admins */}
                         <div className="col-6">
-                        {(this.props.querier_type==='admin')?<span><b>Billing Address:</b> {this.state.bill_addr} {this.state.zip}</span>:""}
+                            <span><b>Billing Address:</b> {this.state.bill_addr} {this.state.zip}</span>
                         </div>
                     </div>
+                    </div>}
                     {
                     (this.state.member_type==='tutor')?
                     <div className="row profile">
                         <div className="col-12">
-                            {(this.state.subjList[0]===null)?null:<div><b>Subjects:</b><br/> {this.getExpList(this.getSubjLvl(this.state.subjList,this.state.lvlList))}</div>}
-                            {(this.state.desc==="")?null:<div><b>Description:</b><br/>{this.state.desc}<br/></div>}
-                            {<div className="view-logs"><a className="btn btn-orange btn-account" href="#" role="button" onClick={this.goToLogs}>View Logs</a></div>}
+                            {(this.state.subjList[0]===null)?null:<div><b>Subjects:</b><br/> {this.getExpertiseList(this.getSubjLvl(this.state.subjList,this.state.lvlList))}</div>}
+                            {(this.props.querier_type!=='admin')?null:
+                            <div>
+                                <b>Description:</b><br/>{this.state.desc}<br/>
+                            </div>}
 
                         </div>
                     </div>

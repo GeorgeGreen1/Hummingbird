@@ -14,8 +14,8 @@ class WhyTakeAction extends Component {
                  { (!this.props.signedIn) ?
                 <div className='subpage-content'>
                     <h3> Why Take Action? </h3> <br/>
-                    <div class="scrollbar" id="style-8">
-                        <div class="force-overflow">
+                    <div className="scrollbar" id="style-8">
+                        <div className="force-overflow">
                             <div className="row subpage-row">
                                 <div className="col-9">
                                 <h4><b>K-12 Tutoring</b></h4>

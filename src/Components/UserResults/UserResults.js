@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
-import './TutorTableAdmin.css';
-class TutorTableAdmin extends Component {
+class UserResults extends Component {
     constructor(){
         super();
         this.state = {
-            tutors: [],
+            users: [],
             page: 0,
             selectedItems: [],
             lastInd: null,
@@ -18,18 +17,19 @@ class TutorTableAdmin extends Component {
     // Set the state data for the list of tutors upon mounting the component, must pad the tutor list to fill out the table to an equal size 
     // for each page. 
     componentDidMount(){
-        let tLength = (this.props.tutors.length<8) ? 8 : Math.ceil(this.props.tutors.length/8)*8;
-        let initTutors = this.padTutors()
+        console.log("mount");
+        let tLength = (this.props.users.length<8) ? 8 : Math.ceil(this.props.users.length/8)*8;
+        let initUsers = this.padUsers()
         this.setState({
-            tutors: initTutors,
+            users: initUsers,
             page: 0,
-            selectedItems: this.displaySetup(0,initTutors),
+            selectedItems: this.displaySetup(0,initUsers),
             lastInd: 8})
-    }
+    }    
     
-    // Pads the tutors array to a multiple of 8
-    padTutors(){
-        let mod = (this.props.tutors.length<8) ? (8-this.props.tutors.length): (8-this.props.tutors.length%8);
+    // Pads the users array to a multiple of 8
+    padUsers(){
+        let mod = (this.props.users.length<8) ? (8-this.props.users.length): (8-this.props.users.length%8);
         let buildArr = []
         if (mod !== 0){
             for (let i = 0;i<mod;i++){
@@ -37,10 +37,10 @@ class TutorTableAdmin extends Component {
                     firstname: "",
                     lastname: "",
                     email: "",
-                    subjects: ""
+                    id: "",
                 })
             }
-            buildArr = this.props.tutors.concat(buildArr);
+            buildArr = this.props.users.concat(buildArr);
         }
         return buildArr;
     }
@@ -56,14 +56,14 @@ class TutorTableAdmin extends Component {
     pageUp = () => {
         const currPage = this.state.page;
         this.setState({page: (currPage+1), });
-        this.setState({selectedItems: this.displaySetup(currPage+1,this.state.tutors)});
+        this.setState({selectedItems: this.displaySetup(currPage+1,this.state.users)});
     }
 
     //Jump down 8 spots in the array
     pageDown = () => {
         const currPage = this.state.page;
         this.setState({page: (currPage-1) });
-        this.setState({selectedItems: this.displaySetup(currPage-1,this.state.tutors)});
+        this.setState({selectedItems: this.displaySetup(currPage-1,this.state.users)});
     }
 
     getSubjList = (subjects) =>{
@@ -77,7 +77,6 @@ class TutorTableAdmin extends Component {
     }
 
     render(){
-        // (this.props.tutors.length > 0 && console.log('ror'));
         return(
             <div>
                 {
@@ -89,15 +88,15 @@ class TutorTableAdmin extends Component {
                         <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Subjects</th>
+                        <th>ID</th>
                         </tr>
                     </thead>
-                    {this.props.tutors.length > 0 && this.state.selectedItems.map(item=>{
+                    {this.props.users.length > 0 && this.state.selectedItems.map(item=>{
                         return (<tr className={(item.firstname!=="")?"member":""} onClick={()=>this.setState({toUser: true, userID: item.id})}>
                                 <td><a>{(item.firstname==="")?<br/> : item.firstname+" "+item.lastname}</a></td>
-                                <td><a>{item.email}</a></td>
-                                <td><a>{this.getSubjList(item.subjects)
-                                }</a></td>
+                                <td><a>{item["email"]}</a></td>
+                                <td><a>{item.id}
+                                </a></td>
                                 </tr>)
                     })}
                 </table>
@@ -106,7 +105,7 @@ class TutorTableAdmin extends Component {
                     {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
                 </div>
                 <div className="col-6">
-                    {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
+                    {(this.state.lastInd<this.state.users.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
                 </div>
                 </div>
                 </div>
@@ -116,13 +115,13 @@ class TutorTableAdmin extends Component {
     }
 }
 
-export default TutorTableAdmin;
+export default UserResults;
 
 
 
     // this.state = {
     //     tutors: [],
     //     page: 0,
-    //     selectedItems: this.displaySetup(0,this.state.tutors),
+    //     selectedItems: this.displaySetup(0,this.state.users),
     //     lastInd: ((tutors.length >= 8)?7:tutors.length)
     // }

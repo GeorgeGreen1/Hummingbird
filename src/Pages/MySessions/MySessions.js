@@ -41,10 +41,10 @@ class MySessions extends Component{
                         <div className='col-9'>
                         <div className='subpage-content'>
                             {/* <div className="f-hum"> */}
-                                <div className="inner-present home-page">
+                            <div className="inner-present home-page">
                                     {(this.props.subpage==="logsession")?
                                     <LogSession tutor_id={this.props.tutor_id}/>:(
-                                        <AllLogs />
+                                        <AllLogs id={this.props.tutor_id} member_type={this.props.memberType} />
                                     )}
                             </div>
                         </div>

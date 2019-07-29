@@ -16,7 +16,7 @@ class BecomingATutor extends Component {
                     We will review your application and contact you to inform you if we are interested in setting up an interview.
                 </a>
                 </div>
-                <Link className="nav-link" to="/account/becomeatutor/apply"><span className="sr-only">(current)</span><a class="btn btn-orange applybutton" href="#" role="button" >Apply</a></Link>
+                <Link className="nav-link" to="/account/becomeatutor/apply"><span className="sr-only">(current)</span><a className="btn btn-orange applybutton" href="#" role="button" >Apply</a></Link>
             </div>
         );
     }

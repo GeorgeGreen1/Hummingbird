@@ -103,16 +103,20 @@ class LogTable extends Component {
                         </tr>
                     </thead>
                     {this.props.logs.length > 0 && this.state.selectedItems.map((item,id)=>{
-                        return (<tr className={(item.firstname!=="")?"member":""} onClick={()=>this.props.userRedirect(item.id)}>
+                        return (<tr className={(item.firstname!=="")?"member":""} /*onClick={()=>this.props.userRedirect(item.id)}*/>
                             <td>{item.firstname} {item.lastname}<br/></td>
                             <td>{item.hours}</td>
                             <td>{item.date}</td>
                         </tr>)
                     })}
                 </table>
-                <div className="control">
-                {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
-                {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
+                <div className="control row">
+                    <div className="col-6">
+                      {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:"E"}
+                    </div>
+                    <div className="col-6">
+                      {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:"E"}
+                    </div>
                 </div>
                 </div>
             </div>

@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import HomeTableStudent from '../../Components/HomeTableStudent/HomeTableStudent';
+import HomeTableStudent from '../../Components/HomeTable/HomeTableStudent';
+import PageTable from '../../Components/PageTable/PageTable';
 import NotifTable from '../../Components/NotifTable/NotifTable';
+import HoursDisplay from '../../Components/HoursDisplay/HoursDisplay';
+
 import './StudentHome.css';
 
 // The homepage for a signed in student account
@@ -15,7 +18,7 @@ class StudentHome extends Component{
     }
     // Retrieve the student's tutors upon mounting the component
     componentDidMount(){
-        fetch("http://localhost:3000/getstudentsessions",{
+        fetch("http://localhost:3000/getmatchedtutors",{
             method: 'post',
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
@@ -25,14 +28,12 @@ class StudentHome extends Component{
         .then(response=>
             response.json()
         ).then(ret => {
-            console.log(ret);
             let tuts = [];
             ret.map(item=>{
                 tuts.push({
-                    date: item.date,
                     name: item.firstname + " " + item.lastname,
-                    subject: item.subject,
-                    email: item.email
+                    email: item.email,
+                    id: item.id
                 });
             })
             this.setState({tutors: tuts})
@@ -52,16 +53,13 @@ class StudentHome extends Component{
                         <div className="page-title"><h2 align="center">Welcome, {this.props.userName}!</h2></div>
                         <div className="row">
                             <div className="col-7">
-                                <h3> My Recent Sessions </h3>
-                                {this.state.tutors.length > 0 && <HomeTableStudent tutors={this.state.tutors} />}
+                                <h3> My Tutors </h3>
+                                {/* {this.state.tutors.length > 0 && <HomeTableStudent tutors={this.state.tutors} />} */}
+                                {this.state.tutors.length > 0 && <PageTable redirectLvl="" interactType="redirect" tableCtgs={["Name","Email"]} pageLength={12} entries={this.state.tutors} dispKeys={["name","email"]}/>}
                             </div>
                             <div className="col-5">
                                 <NotifTable id={this.props.id}/>
-                                <div className="inner-present hours-display">
-                                    <div className="head-display">Number of Hours Remaining:</div>
-                                    <div className="hours-count"><a>{hours}</a></div>
-                                    <div className="hours-labelb"><a>To add more hours, click on "Subscriptions" on the navigation bar.</a></div>
-                                </div>
+                                <HoursDisplay id={this.props.id}/>
                             </div>
                         </div>
                     </div>

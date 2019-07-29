@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 // The available locations
 
+
 const initState = {
     meetAddress: "",
     city: "",
@@ -20,9 +21,14 @@ const initState = {
     invalidStates:"",
     invalidPhone:"",
     invalidAltPhone:"",
+    invalidEduEarned:"",
+    invalidBillAddress:"",
+    invalidMeetAddress:"",
+    invalidCity:"",
     addsubj: "",
-    addlvl: "",
+    addlvl: -1,
     selectsubj: "",
+    edu_earned: -1,
     mysubjects: [],
     subjects: []
 };
@@ -32,7 +38,14 @@ const states = ["AL","AK","AZ","AR","CA","CO","CT","DC","DE","FL","GA","GU","HI"
                 "MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC",
                 "ND","OH","OK","OR","PA","PR","RI","SC","SD","TN","TX",
                 "UT","VT","VA","VI","WA","WV","WI","WY"];
-const lvls = ["Elementary","Intermediate","High School","College"];
+const lvls = ["Elementary","Middle School","High School","College"];
+const education = [
+    "H.S. Diploma or Equivalent",
+    "Associate's Degree",
+    "Bachelor's Degree",
+    "Master's Degree",
+    "Doctorate"
+];
 class TutorAccountInfo extends Component {
     constructor(props){
         super(props);
@@ -97,6 +110,24 @@ class TutorAccountInfo extends Component {
             })
             this.setState({mysubjects: subjList})
         })
+        fetch("http://localhost:3000/gettutorbg",{
+            method: 'post',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({
+                id: this.props.id
+            })
+        })
+        .then(response => {
+            response.json()
+        }
+        ).then(ret=>{
+            if(ret !== undefined){
+                this.setState({
+                    edu_earned: ret[0].edu_earned,
+                    description: ret[0].description    
+                })
+            }
+        })
     }
     onPhoneChange = (event) => {
         this.setState({phone: event.target.value})
@@ -137,7 +168,7 @@ class TutorAccountInfo extends Component {
         this.setState({addsubj: event.target.value});
     }
     onAddLvlChange = (event) => {
-        this.setState({addlvl: event.target.value});
+        this.setState({addlvl: lvls.indexOf(event.target.value)});
     }
     onAddSubjClick = () => {
         console.log("adding")
@@ -176,6 +207,11 @@ class TutorAccountInfo extends Component {
             }
         )
     }
+    onEduEarnedChange = (event) =>{
+        this.setState({
+            edu_earned: education.indexOf(event.target.value)
+        });
+    }
     onSubmitClick = (event) =>{
         let valid = true;
         this.setState({ invalidMeetAddress: "",
@@ -184,7 +220,8 @@ class TutorAccountInfo extends Component {
                         invalidZip: "",
                         invalidStates:"",
                         invalidPhone:"",
-                        invalidAltPhone:""
+                        invalidAltPhone:"",
+                        invalidEduEarned:""
                     });
         // Set blank entries to original value
         if (this.state.meetAddress===""){
@@ -249,7 +286,8 @@ class TutorAccountInfo extends Component {
                 billAddress: this.state.billAddress,
                 alt_phone: this.state.alt_phone,
                 id: this.props.id,
-                descr: this.state.description
+                descr: this.state.description,
+                edu_earned: this.state.edu_earned
             })
         }).then(response => 
             response.json())
@@ -262,7 +300,8 @@ class TutorAccountInfo extends Component {
                     phone_loaded: ret.phone,
                     billAddress_loaded: ret.bill_addr,
                     alt_phone_loaded: ret.alt_phone,
-                    description: ret.description
+                    description: ret.description,
+                    edu_earned: ret.edu_earned
                 })
             })
         }
@@ -274,33 +313,46 @@ class TutorAccountInfo extends Component {
                     <div className="row">
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                        <label for="phone">Phone (XXX-XXX-XXXX):</label>
-                                        <input type="text" value={this.state.phone} class="form-control" id="phone" onChange={this.onPhoneChange} />
-                                        <div className={"invalid-entry " }>Please enter a valid phone number!</div>
+                                        <label htmlFor="phone">Phone (XXX-XXX-XXXX):</label>
+                                        <input type="text" value={this.state.phone} className="form-control" id="phone" onChange={this.onPhoneChange} />
+                                        <div className={"invalid-entry "+this.state.invalidPhone}>Please enter a valid phone number!</div>
                                     </div>
                                 </div>
                                 <div className="col-6"> 
                                     <div className="entry-prompt">
-                                        <label for="meetAddress">Preferred Meeting Address:</label>
-                                        <input type="text" value={this.state.meetAddress} class="form-control" id="meetAddress" onChange={this.onMeetAddressChange}/>
-                                        <div className={"invalid-entry " }>Please enter a meeting address!</div>
+                                        <label htmlFor="meetAddress">Preferred Meeting Address:</label>
+                                        <input type="text" value={this.state.meetAddress} className="form-control" id="meetAddress" onChange={this.onMeetAddressChange}/>
+                                        <div className={"invalid-entry "+this.state.invalidMeetAddress}>Please enter a meeting address!</div>
                                     </div>
                                 </div>
                     </div>
                     <div className="row">
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                        <label for="alt-phone">Alternate Phone Number:</label>
-                                        <input type="text" value={this.state.alt_phone} class="form-control" id="alt-phone" onChange={this.onAltPhoneChange} />
-                                        {/* <div className={"invalid-entry " }>Please enter a valid phone number!</div> */}
+                                        <label htmlFor="alt-phone">Alternate Phone Number:</label>
+                                        <input type="text" value={this.state.alt_phone} className="form-control" id="alt-phone" onChange={this.onAltPhoneChange} />
+                                        <div className={"invalid-entry "+this.state.invalidAltPhone}>Please enter a valid phone number!</div>
                                     </div> 
                                 </div>
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                    <label htmlFor="description">Description:</label>
+                                    <label htmlhtmlFor="description">Description:</label>
                                     <textarea id="description" value={this.state.description} onChange={this.onDescriptionChange}/> 
                                     </div> 
                                 </div>
+                    </div>
+                    <div className="row">
+                            <div className="col-6">
+                                    <div className="entry-prompt">
+                                        <label htmlFor="edu-earned">Education:</label><br/>
+                                        <select className="subj-select" onChange={this.onEduEarnedChange}>
+                                        <option value="">Select Level...</option>
+                                            {education.map(item=>{
+                                                return(<option>{item}</option>)
+                                                })}
+                                        </select>
+                                    </div> 
+                            </div>
                     </div>
                 </div>
                 <div className='billing-info'>
@@ -310,37 +362,37 @@ class TutorAccountInfo extends Component {
                     <div className="row">
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                        <label for="billAddress">Billing Address:</label>
-                                        <input type="text" value={this.state.billAddress} class="form-control" id="billAddress" onChange={this.onBillAddressChange} />
-                                        {/* <div className={"invalid-entry " }>Please enter a valid city!</div> */}
+                                        <label htmlFor="billAddress">Billing Address:</label>
+                                        <input type="text" value={this.state.billAddress} className="form-control" id="billAddress" onChange={this.onBillAddressChange} />
+                                        <div className={"invalid-entry "+this.state.invalidBillAddress}>Please enter a valid city!</div>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                        <label for="city">City:</label>
-                                        <input type="text" value={this.state.city} class="form-control" id="city" onChange={this.onCityChange} />
-                                        <div className={"invalid-entry " }>Please enter a valid city!</div>
+                                        <label htmlFor="city">City:</label>
+                                        <input type="text" value={this.state.city} className="form-control" id="city" onChange={this.onCityChange} />
+                                        <div className={"invalid-entry "+this.state.invalidCity}>Please enter a valid city!</div>
                                     </div>
                                 </div>
                     </div>
                     <div className="row">
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                    <label for="states">State:</label><br/>
-                                    <select class="date-select month-select" value={this.state.states} id="states" onChange={this.onStatesChange} required="">
+                                    <label htmlFor="states">State:</label><br/>
+                                    <select className="date-select month-select" value={this.state.states} id="states" onChange={this.onStatesChange} required="">
                                         <option value="">State</option>
                                         {states.map(item=>{
                                         return(<option>{item}</option>)
                                         })}
                                     </select>
-                                    <div className={"invalid-entry "}>Please enter a valid state!</div>
+                                    <div className={"invalid-entry "+this.state.invalidStates}>Please enter a valid state!</div>
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="entry-prompt">
-                                        <label for="zip">ZIP Code:</label>
-                                        <input type="text" value={this.state.zip} class="form-control" id="zip" onChange={this.onZipChange} />
-                                        <div className={"invalid-entry " }>Please enter a valid ZIP code!</div>
+                                        <label htmlFor="zip">ZIP Code:</label>
+                                        <input type="text" value={this.state.zip} className="form-control" id="zip" onChange={this.onZipChange} />
+                                        <div className={"invalid-entry "+this.state.invalidZip}>Please enter a valid ZIP code!</div>
                                     </div>
                                 </div>
                     </div>

@@ -32,7 +32,8 @@ class NotifTable extends Component{
             let mesgs = [];
             console.log(ret);
             ret.map(item=>{
-                mesgs.push(item.mesg);
+                mesgs.push({mesg: item.mesg,
+                            time: item.time});
             })
             this.setState({
                 messages: mesgs
@@ -41,11 +42,22 @@ class NotifTable extends Component{
         )   
     }
 
-    removeMessage = (index) => {
-        if (this.state.messages.length>1){
-            this.setState({
-                messages: this.state.messages.slice(0,index).concat(this.state.messages.slice(index+1,this.state.messages.length))
+    removeMessage = (index,time) => {
+        if (this.state.messages.length){
+            fetch("http://localhost:3000/deletenotif",{
+                method: 'post',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({
+                    id: this.props.id,
+                    time: time
+                })
             })
+            .then(()=>{
+                this.setState({
+                    messages: this.state.messages.slice(0,index).concat(this.state.messages.slice(index+1,this.state.messages.length))
+                })
+                }
+            )
         }else{
             this.setState({
                 messages: []
@@ -59,10 +71,10 @@ class NotifTable extends Component{
             <div className="notifications">
                     <div className="inner-present notif">
                     <div className="head-display">Notifications:</div>
-                        <div class="scrollbar" id="style-8">
-                            <div class="force-overflow">
+                        <div className="scrollbar" id="style-8">
+                            <div className="force-overflow">
                                 {this.state.messages.map(item=>{
-                                    return (<div><a>{item}</a> <span className="notif-rm" onClick={()=>this.removeMessage(this.state.messages.indexOf(item))}><b>X</b></span>
+                                    return (<div><a>{item.mesg}</a> <span className="notif-rm" onClick={()=>this.removeMessage(this.state.messages.indexOf(item),item.time)}><b>X</b></span>
                                             <hr/></div>)
                                 })}
                             </div>

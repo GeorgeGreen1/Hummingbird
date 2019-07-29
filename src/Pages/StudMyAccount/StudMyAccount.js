@@ -6,7 +6,7 @@ import StudAccountInfo from './StudMyAccountParts/StudAccountInfo';
 import StudAccountSettings from './StudMyAccountParts/StudAccountSettings';
 import BecomingATutor from './StudMyAccountParts/BecomingATutor';
 import TutorApply from './StudMyAccountParts/TutorApply';
-
+import ChangePassword from '../ChangePassword/ChangePassword';
 class StudMyAccount extends Component{
     constructor(){  
         super();
@@ -17,15 +17,17 @@ class StudMyAccount extends Component{
         if (this.props.subpage === 'myinfo'){
             subpage=<StudAccountInfo  email={this.props.email} id={this.props.id}/>
         } else if (this.props.subpage === 'settings'){
-            subpage=<StudAccountSettings />
+            subpage=<StudAccountSettings member_type={this.props.member_type} id={this.props.id} />
         } else if (this.props.subpage === 'becomeatutor') {
             subpage=<BecomingATutor />
         } else if (this.props.subpage === 'tutorapply') {
             subpage=<TutorApply email={this.props.email}/>
+        } else if (this.props.subpage === 'changepass') {
+            subpage=<ChangePassword id={this.props.id}/>
         }
         return (
             <div>
-                { (this.props.signedIn && (this.props.memberType==='student')) ?
+                { (this.props.signedIn && (this.props.member_type==='student')) ?
                 <div> 
                     <div className="fg-hum">
                         <div className="row">

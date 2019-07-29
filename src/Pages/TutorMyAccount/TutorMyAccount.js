@@ -3,6 +3,7 @@ import {Redirect} from 'react-router-dom';
 import NavList from '../../Components/NavList/NavList';
 import TutorAccountInfo from './TutorMyAccountParts/TutorAccountInfo';
 import TutorAccountSettings from './TutorMyAccountParts/TutorAccountSettings';
+import ChangePassword from '../ChangePassword/ChangePassword';
 class TutorMyAccount extends Component{
     constructor(){  
         super();
@@ -14,12 +15,15 @@ class TutorMyAccount extends Component{
             subpage = <TutorAccountInfo id={this.props.id}/>
         }
         else if (this.props.subpage === 'settings'){
-            subpage = <TutorAccountSettings />
+            subpage = <TutorAccountSettings id={this.props.id} member_type={this.props.member_type}/>
         } 
+        else if (this.props.subpage === 'changepass'){
+            subpage = <ChangePassword id={this.props.id}/>
+        }
         return (
             <div>
                 { 
-                (this.props.signedIn && (this.props.memberType==='tutor')) ?
+                (this.props.signedIn && (this.props.member_type==='tutor')) ?
                 <div>
                     <div className="fg-hum">
                         <div className="row">

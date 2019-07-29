@@ -62,6 +62,7 @@
 
 .inner-present.home-page {
   margin: 10px;
+  padding-bottom: 10px;
   height: 94%;
 }
 
@@ -110,7 +111,6 @@
 .btn-orange{
   background-color: #ff903a;
   color: #fff;
-  margin: 0px 0 -8px 0;
   transition: none;
 }
 
@@ -151,18 +151,46 @@
 
 .btn-search{
   background-color: #ff903a;
-  border-radius: 5px;
-  color: #fff;
-  width: 130px;
-  padding-top: 10px;
-  font-size: 24px;
-  padding-bottom: 10px;
-  margin: 12px 0 0 12px;
+  font-size: 16px;
+  height: 40px;
+  margin-bottom: 10px;
+  margin: 8px 0 0 12px;
 }
 
 .btn-link{
   margin: 12px 0 0 0;
   height: 40px;
+}
+
+.btn-tableswitch{
+  display: block;
+  color:#fff;
+  width: 80%;
+  padding: 2px;
+  margin-top: 10px;
+  margin-left: 4px;
+  background-color:#517ecb;
+  border-radius: 5px;
+  transition: none;
+  /* float: left; */
+}
+/* .btn-tableswitch.right{
+  float: right;
+} */
+.btn-tableswitch:hover{
+  background-color:#1b50a6;
+  color: #fff;
+}
+
+.account-btns{
+  text-align: center;
+  margin-bottom: 30px;
+}
+.btn-account{
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: auto;
 }
 
 /* Tables */
@@ -200,6 +228,26 @@ tr.member td:hover{
   cursor: pointer;
 }
 
+/*Table Page Change Button */
+.control{
+  width:18%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.find-tutor-button{
+  text-align: center;
+}
+
+/* Search Box */
+.querybox{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/* Match Input Box */
+.matchentry{
+  padding: 0 15% 0 15%;
+}
 
 /*Additional Properties*/
 .center-img{
@@ -251,6 +299,10 @@ select{
 .subj-select{
   margin-bottom: 11px;
 }
+.posting-delete{
+  float: right;
+  margin: 0 4px 4px 0;
+}
 
 /* From Captain Anonymous on CodePen */
 .scrollbar
@@ -273,6 +325,13 @@ select{
 .subpage-content{
 	padding: 5px 10px 5px 10px;
 }  
+
+.changepass-fields{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
 
 /* Scrolling elements */
 
@@ -299,3 +358,74 @@ select{
 	background-color: #b0caf7;	
 }
 
+/* Switch, from W3 Schools */
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #3b6ab9;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.account-settings{
+  margin-left: 30%;
+}
+.account-settings .row{
+  margin-bottom: 10px;
+}

@@ -4,8 +4,6 @@ import WeekReport from '../../Components/WeekReport/WeekReport';
 import './TutorLogs.css';
 
 var ld = require('lodash');
-
-// Displays information on becoming a tutor
 const initState = {
     all_weeks: [],
     page: 0,

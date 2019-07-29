@@ -17,7 +17,7 @@ class TutorApply extends Component {
     render(){
         return (
             <div className='subpage-content'>
-                <a class="btn btn-orange" href="#" role="button" onClick={this.onTutor}>Click Here to Become a Tutor</a>
+                <a className="btn btn-orange" href="#" role="button" onClick={this.onTutor}>Click Here to Become a Tutor</a>
             </div>
         );
     }

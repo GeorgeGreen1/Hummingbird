@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
+import './HomeTable.css';
 import {Redirect} from 'react-router-dom';
-import {Link} from 'react-router-dom';
-import './TutorTableAdmin.css';
-class TutorTableAdmin extends Component {
+class HomeTableStudent extends Component {
     constructor(){
         super();
         this.state = {
             tutors: [],
-            page: 0,
+            page: "",
             selectedItems: [],
-            lastInd: null,
+            lastInd: "",
             toUser: false,
             userID: -1
         }
@@ -34,10 +33,8 @@ class TutorTableAdmin extends Component {
         if (mod !== 0){
             for (let i = 0;i<mod;i++){
                 buildArr = buildArr.concat({
-                    firstname: "",
-                    lastname: "",
-                    email: "",
-                    subjects: ""
+                    name: "",
+                    email: ""
                 })
             }
             buildArr = this.props.tutors.concat(buildArr);
@@ -66,48 +63,32 @@ class TutorTableAdmin extends Component {
         this.setState({selectedItems: this.displaySetup(currPage-1,this.state.tutors)});
     }
 
-    getSubjList = (subjects) =>{
-        let subjList = []
-        for (let i =0; i< subjects.length;i++){
-            subjList.push(<div>
-                {subjects[i].subject} - {subjects[i].level}
-            </div>)
-        }
-        return subjList;
-    }
+
 
     render(){
-        // (this.props.tutors.length > 0 && console.log('ror'));
         return(
             <div>
                 {
                 (this.state.toUser)?
                 <Redirect to={"userprofile/"+this.state.userID}/>:
                 <div>
-                <table className="job-table">
+                <table>
                     <thead>
                         <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Subjects</th>
                         </tr>
                     </thead>
                     {this.props.tutors.length > 0 && this.state.selectedItems.map(item=>{
-                        return (<tr className={(item.firstname!=="")?"member":""} onClick={()=>this.setState({toUser: true, userID: item.id})}>
-                                <td><a>{(item.firstname==="")?<br/> : item.firstname+" "+item.lastname}</a></td>
+                        return (<tr className={(item.name!=="")?"member":""} onClick={()=>this.setState({toUser: true, userID: item.id})}>
+                                <td><a>{(item.name==="")?<br/> : item.name}</a></td>
                                 <td><a>{item.email}</a></td>
-                                <td><a>{this.getSubjList(item.subjects)
-                                }</a></td>
                                 </tr>)
                     })}
                 </table>
-                <div className="control row">
-                <div className="col-6">
-                    {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
-                </div>
-                <div className="col-6">
-                    {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
-                </div>
+                <div className="control">
+                {(this.state.page > 0 )?<a className="btn btn-tableswitch" href="#" role="button" onClick={this.pageDown}>&#x25C4;</a>:null}
+                {(this.state.lastInd<this.state.tutors.length)?<a className="btn btn-tableswitch right " href="#" role="button" onClick={this.pageUp}>&#x25BA;</a>:null}
                 </div>
                 </div>
                 }
@@ -116,7 +97,7 @@ class TutorTableAdmin extends Component {
     }
 }
 
-export default TutorTableAdmin;
+export default HomeTableStudent;
 
 
 

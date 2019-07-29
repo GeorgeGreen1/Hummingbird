@@ -31,8 +31,8 @@ const btns =
         btnName: "Settings"
     },
     {
-        route: "/account/becomeatutor",
-        btnName: "Becoming a Tutor"
+        route: "/account/changepass",
+        btnName: "Change Password"
     }],
     [{
         route: "/account/myinfo",
@@ -43,8 +43,8 @@ const btns =
         btnName: "Settings"
     },
     {
-        route: "/account/myinfo",
-        btnName: "Alpha"
+        route: "/account/changepass",
+        btnName: "Change Password"
     }],
     [{
         route: "/mysessions/logsession",
@@ -53,6 +53,14 @@ const btns =
     {
         route: "/mysessions/all-logs",
         btnName: "All Logs"
+    }],
+    [{
+        route: "/adminsearch/adminalluserssearch",
+        btnName: "Search All Users"
+    },
+    {
+        route: "/adminsearch/admintutorsubject",
+        btnName: "Find Tutors By Subject"
     }]
 ]
 ;
@@ -70,6 +78,9 @@ class NavList extends Component {
         }
         else if (this.props.btnSet === "logs"){
             btnList = btns[3];
+        }
+        else if (this.props.btnSet === "adminsearch"){
+            btnList = btns[4];
         }
 
         return (

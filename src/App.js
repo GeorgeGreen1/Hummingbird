@@ -20,6 +20,7 @@ import Tutor from './Pages/Tutor/Tutor';
 import TutorList from './Pages/TutorList/TutorList';
 import Pricing from './Pages/Pricing/Pricing';
 import MySessions from './Pages/MySessions/MySessions';
+import MySessionsStudent from './Pages/MySessions/MySessionsStudent';
 import PurchaseHours from './Pages/PurchaseHours/PurchaseHours';
 import FindTutor from './Pages/FindTutor/FindTutor';
 import SignIn from './Pages/SignIn/SignIn';
@@ -27,16 +28,18 @@ import Register from './Pages/Register/Register';
 import StudMyAccount from './Pages/StudMyAccount/StudMyAccount';
 import TutorMyAccount from './Pages/TutorMyAccount/TutorMyAccount';
 import UserProfile from './Pages/UserProfile/UserProfile';
-import TutorLogs from './Pages/TutorLogs/TutorLogs';
+import MatchUsers from './Pages/MatchUsers/MatchUsers';
+import AdminSearch from './Pages/AdminSearch/AdminSearch';
+//import TutorLogs from './Pages/TutorLogs/TutorLogs';
 
 const bannerRotation = [banner_1,banner_2,banner_3,banner_4,banner_5];
 const initState = {
   signedIn : true,
-  email: "urnes038@umn.edu",
-  name: "Jakob",
+  email: "heloooiamcyunthiuh@gmail.com",
+  name: "Todd",
   navbarElem: 0,
   member_type: 'tutor',
-  id: 16,
+  id: 5,
   loaded: false
 }
 
@@ -108,7 +111,7 @@ class App extends Component {
       // Purchase Hours page
       {
         path: "/addhours",
-        renderComp: <PurchaseHours signedIn={this.state.signedIn} memberType={this.state.member_type} loaded={this.state.loaded}/>
+        renderComp: <PurchaseHours signedIn={this.state.signedIn} id={this.state.id} memberType={this.state.member_type} loaded={this.state.loaded}/>
       },
       // Find a tutor page
       {
@@ -134,12 +137,12 @@ class App extends Component {
       // My info
       {
         path: "/account/myinfo",
-        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo' memberType={this.state.member_type}/> : <StudMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo' memberType={this.state.member_type}/>
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo' member_type={this.state.member_type}/> : <StudMyAccount email={this.state.email} id={this.state.id} signedIn={this.state.signedIn} subpage='myinfo' member_type={this.state.member_type}/>
       },
       // My Account Settings
       {
         path: "/account/settings",
-        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} subpage='settings' memberType={this.state.member_type}/> : <StudMyAccount signedIn={this.state.signedIn} subpage='settings' memberType={this.state.member_type}/>
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} id={this.state.id} subpage='settings' member_type={this.state.member_type}/> : <StudMyAccount signedIn={this.state.signedIn} subpage='settings' id={this.state.id} member_type={this.state.member_type}/>
       },
       // Become a tutor
       {
@@ -150,6 +153,10 @@ class App extends Component {
       {
         path: "/account/becomeatutor/apply",
         renderComp: <StudMyAccount signedIn={this.state.signedIn} subpage="tutorapply" email={this.state.email} memberType={this.state.member_type}/>
+      },
+      {
+        path: "/account/changepass",
+        renderComp: (this.state.member_type === 'tutor') ? <TutorMyAccount signedIn={this.state.signedIn} id={this.state.id} subpage='changepass' member_type={this.state.member_type}/> : <StudMyAccount signedIn={this.state.signedIn} subpage='changepass' id={this.state.id} member_type={this.state.member_type}/>
       },
       // Tutor's sessions
 
@@ -178,6 +185,25 @@ class App extends Component {
       {
         path: "/tutorlist",
         renderComp: <TutorList signedIn={this.state.signedIn} memberType={this.state.member_type}/>
+      },
+      // Tutor list for admins to see
+      {
+        path: "/mysessionsstudent",
+        renderComp: <MySessionsStudent id = {this.state.id} signedIn={this.state.signedIn} memberType={this.state.member_type}/>
+      },
+      // Interface for Admins to match students with tutors
+      {
+        path: "/matchusers",
+        renderComp: <MatchUsers id = {this.state.id} signedIn={this.state.signedIn} memberType={this.state.member_type}/>
+      },
+      // Interface for Admins to search for users
+      {
+        path: "/adminsearch/adminalluserssearch",
+        renderComp: <AdminSearch id = {this.state.id} signedIn={this.state.signedIn} subpage="usersearch" memberType={this.state.member_type}/>
+      },
+      {
+        path: "/adminsearch/admintutorsubject",
+        renderComp: <AdminSearch id = {this.state.id} signedIn={this.state.signedIn} subpage="tutorsubject" memberType={this.state.member_type}/>
       }
     ];
     return (
@@ -191,10 +217,10 @@ class App extends Component {
                 routes.map(item => {
                   return(<Route exact path={item.path} render={()=>item.renderComp} />)
                 })}
-            <Route exact path="/userprofile/:id" render={({match})=><UserProfile signedIn={this.state.signedIn} match={match} querier_type={this.state.member_type}/>}/>
-            <Route exact path="/tutorlogs/:id" render={({match})=><TutorLogs match={match} querier_type={this.state.member_type}/>}/>
-              <footer class="footer">
-                  <div class="container">
+            <Route exact path="/userprofile/:id" render={({match})=><UserProfile signedIn={this.state.signedIn} match={match} querier_type={this.state.member_type} id={this.state.id}/>}/>
+            {/* <Route exact path="/tutorlogs/:id" render={({match})=><TutorLogs match={match} querier_type={this.state.member_type}/>}/> */}
+              <footer className="footer">
+                  <div className="container">
                       <span> Take Action Tutoring &copy; 2019</span>
                   </div>
               </footer>
