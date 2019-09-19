@@ -20,7 +20,7 @@ class AdminSearch extends Component{
         this.state = initState;
     }
 
-    
+
     render(){
         return (
             <div>

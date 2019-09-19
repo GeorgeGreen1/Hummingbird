@@ -98,6 +98,21 @@ class UserProfile extends Component{
         })
     }
 
+    onTutorizeClick = () => {
+        fetch("http://localhost:3000/tutorize",{
+            method: 'post',
+            headers: {'Content-Type' : 'application/json'},
+            body: JSON.stringify({
+                user_id: this.props.match.params.id
+            })
+        }).then(response => {
+            response.json();
+        }).then(ret=>{
+            window.location.reload();
+            this.setState({member_type: "tutorx"});
+        })
+    }
+
     goToLogs = () => {
         this.setState({
             redirect: true
@@ -127,31 +142,31 @@ class UserProfile extends Component{
                     <span><p><b>Email:</b> {this.state.email}</p></span>
                     :
                     <div>
-                    <div className="row profile">
-                        <div className="col-6">
-                            <b>Email:</b> {this.state.email}
+                        <div className="row profile">
+                            <div className="col-6">
+                                <b>Email:</b> {this.state.email}
+                            </div>
+                            <div className="col-6">
+                                <b>Phone:</b> {this.state.phone}
+                            </div>
                         </div>
-                        <div className="col-6">
-                            <b>Phone:</b> {this.state.phone}
+                        <div className="row profile">
+                            <div className="col-6">
+                                <b>Years of Experience:</b> {this.state.years_exp}
+                            </div>
+                            <div className="col-6">
+                                <b>Education Earned:</b> {education[this.state.edu]}
+                            </div>
                         </div>
-                    </div>
-                    <div className="row profile">
-                        <div className="col-6">
-                            <b>Years of Experience:</b> {this.state.years_exp}
+                        <div className="row profile">
+                            <div className="col-6">
+                                <b>Location:</b> {this.state.city}, {this.state.ste}
+                            </div>
+                            {/* Organization needs to be different for non-admins */}
+                            <div className="col-6">
+                                <span><b>Billing Address:</b> {this.state.bill_addr} {this.state.zip}</span>
+                            </div>
                         </div>
-                        <div className="col-6">
-                            <b>Education Earned:</b> {education[this.state.edu]}
-                        </div>
-                    </div>
-                    <div className="row profile">
-                        <div className="col-6">
-                            <b>Location:</b> {this.state.city}, {this.state.ste}
-                        </div>
-                        {/* Organization needs to be different for non-admins */}
-                        <div className="col-6">
-                            <span><b>Billing Address:</b> {this.state.bill_addr} {this.state.zip}</span>
-                        </div>
-                    </div>
                     </div>}
                     {
                     (this.state.member_type==='tutor')?
@@ -166,6 +181,14 @@ class UserProfile extends Component{
                         </div>
                     </div>
                     :null
+                    }
+                    {
+                        (this.props.querier_type==='admin'&&this.state.member_type==='student')?
+                        <div className="account-btns">
+                            <a className="btn btn-orange btn-account" href="#" role="button" onClick={this.onTutorizeClick}>Tutorize</a><br/>
+                        </div>
+                        :
+                        null
                     }
                     </div>
                 </div>

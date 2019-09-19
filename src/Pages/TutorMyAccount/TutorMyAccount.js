@@ -12,7 +12,7 @@ class TutorMyAccount extends Component{
     render() {
         let subpage;
         if (this.props.subpage === 'myinfo'){
-            subpage = <TutorAccountInfo id={this.props.id}/>
+            subpage = <TutorAccountInfo id={this.props.id} member_type={this.props.member_type}/>
         }
         else if (this.props.subpage === 'settings'){
             subpage = <TutorAccountSettings id={this.props.id} member_type={this.props.member_type}/>

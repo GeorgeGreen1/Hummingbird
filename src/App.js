@@ -38,7 +38,7 @@ const initState = {
   email: "heloooiamcyunthiuh@gmail.com",
   name: "Todd",
   navbarElem: 0,
-  member_type: 'tutor',
+  member_type: 'admin',
   id: 5,
   loaded: false
 }

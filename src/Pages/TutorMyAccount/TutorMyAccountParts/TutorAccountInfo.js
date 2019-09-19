@@ -177,6 +177,7 @@ class TutorAccountInfo extends Component {
             headers: {'Content-Type' : 'application/json'},
             body: JSON.stringify({
                 id: this.props.id,
+                member_type: this.props.member_type,
                 subj: this.state.addsubj,
                 lvl: this.state.addlvl
             })

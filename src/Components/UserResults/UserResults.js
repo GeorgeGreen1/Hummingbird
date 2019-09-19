@@ -81,7 +81,7 @@ class UserResults extends Component {
             <div>
                 {
                 (this.state.toUser)?
-                <Redirect to={"userprofile/"+this.state.userID}/>:
+                <Redirect to={"../userprofile/"+this.state.userID}/>:
                 <div>
                 <table className="job-table">
                     <thead>

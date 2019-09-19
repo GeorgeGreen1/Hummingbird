@@ -10,11 +10,20 @@ class AdminHome extends Component{
     constructor(){
         super();
         this.state = {
-            tutors: []
+            sessions: []
         };
     }
     // Retrieve the student's tutors upon mounting the component
     componentDidMount(){
+        fetch("http://localhost:3000/getrecentsessions",{
+            method: 'get',
+            headers: {'Content-Type' : 'application/json'},
+        }).then(response=>
+                response.json()
+            ).then(ret => {
+                this.setState({sessions: ret});
+                console.log(this.state.sessions);
+            })
     }
 
     render(){
@@ -29,7 +38,7 @@ class AdminHome extends Component{
                         <div className="page-title"><h2 align="center">Welcome, {this.props.userName}!</h2></div>
                         <div className="row">
                             <div className="col-7">
-                                <PageTable redirectLvl="" pageLength={12} tableCtgs={["A","B","C"]} entries={[{"alpha":1,"delta":2,"bravo":3}]} dispKeys={["alpha","delta","bravo"]}/>
+                                {this.state.sessions.length && <PageTable redirectLvl="" pageLength={12} tableCtgs={["Name","Date"]} entries={this.state.sessions} dispKeys={["name","date"]}/>}
                             </div>
                             <div className="col-5">
                                 <NotifTable id={this.props.id}/>

@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "bcrypt": "^3.0.0",
-    "lodash": "^4.17.11",
-    "react": "^16.4.2",
-    "react-date-picker": "^7.0.0",
-    "react-dom": "^16.4.2",
+    "bcrypt": "^3.0.6",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15",
+    "react": "^16.8.6",
+    "react-date-picker": "^7.8.0",
+    "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
-    "react-time-picker": "^3.5.1"
+    "react-time-picker": "^3.7.0",
+    "webpack-dev-server": "^3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
